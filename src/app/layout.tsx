@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import localfont from "next/font/local";
-import StoreProvider from "./StoreProvider";
 import "./globals.css";
 
 const lato = localfont({
@@ -47,9 +46,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${lato.variable} font-lato`}>
-        <StoreProvider>
-          {children}
-        </StoreProvider>
+        {children}
       </body>
     </html>
   );
