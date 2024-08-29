@@ -31,6 +31,8 @@ const config: Config = {
       'outline-focus': '#2E3C63',
       'sucess': '#388E3C',
       'erorr': '#D32F2F',
+      'surface': '#FFFFFF',
+      'surface-variant': '#FFD2C1',
     },
   },
   plugins: [],
