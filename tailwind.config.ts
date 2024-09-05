@@ -18,7 +18,7 @@ const config: Config = {
       },
     },
     colors: {
-      'primary': '#2E3C63',
+      'primary': '#65558F',
       'on-primary': '#FFFFFF',
       'secondary': '#FF6347',
       'on-secondary': '#FFFFFF',
@@ -31,6 +31,7 @@ const config: Config = {
       'outline-focus': '#2E3C63',
       'sucess': '#388E3C',
       'erorr': '#D32F2F',
+      'high': '#21005D'
     },
   },
   plugins: [],
