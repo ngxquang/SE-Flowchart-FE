@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import "./ui/globals.css";
-import { lato } from "./ui/font";
+import "../styles/globals.css";
+import { lato } from "./font";
+import { AppProvider } from "@/providers";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${lato.variable}`}>
-        {children}
+        <AppProvider>
+          {children}
+        </AppProvider>
       </body>
     </html>
   );
