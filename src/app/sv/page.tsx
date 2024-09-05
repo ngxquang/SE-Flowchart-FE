@@ -12,9 +12,7 @@ export default function List() {
       <ul>
         {chapters.map((chapter) => (
           <li key={chapter.id}>
-            <Link href={`/sv/${chapter.id}`}>
-              {chapter.title}
-            </Link>
+            <Link href={`/sv/${chapter.id}`}>{chapter.title}</Link>
           </li>
         ))}
       </ul>

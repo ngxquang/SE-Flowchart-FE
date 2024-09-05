@@ -1,3 +1,3 @@
-import AppContext from "./AppContext";
+import AppContext from './AppContext';
 
 export { AppContext };
