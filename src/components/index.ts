@@ -4,6 +4,4 @@ import ButtonSolid from './Button/ButtonSolid';
 import { classNames } from './classNames';
 
 export { classNames };
-export { ButtonBase };
-export { ButtonSolid };
-export { ButtonOutline };
+export { ButtonBase, ButtonSolid, ButtonOutline };
