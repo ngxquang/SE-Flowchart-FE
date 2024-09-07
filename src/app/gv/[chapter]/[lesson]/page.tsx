@@ -74,7 +74,7 @@ export default function LessonDetail() {
                   ) : (
                     <div
                       className="flex h-8 w-full items-center justify-center rounded-xl border border-outline bg-primary-container"
-                      onClick={handldeCollapseOrExpandPseudo}
+                      onClick={handleCollapseOrExpandDe}
                     >
                       <Image
                         alt="dropdown-icon"
