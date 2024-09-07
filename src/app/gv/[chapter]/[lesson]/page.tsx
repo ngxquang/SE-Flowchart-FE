@@ -2,15 +2,15 @@
 
 import Image from 'next/image';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
-import { EBDe, EBPseudo, Preview } from '@/components';
+import { EBAssignment, EBPseudo, Preview } from '@/components';
 import { useState } from 'react';
 
 export default function LessonDetail() {
-  const [isShowDe, setIsShowDe] = useState(false);
+  const [isShowAssignment, setIsShowAssignment] = useState(false);
   const [isShowPseudo, setIsShowPseudo] = useState(false);
 
   const handleCollapseOrExpandDe = () => {
-    setIsShowDe(!isShowDe);
+    setIsShowAssignment(!isShowAssignment);
   };
 
   const handldeCollapseOrExpandPseudo = () => {
@@ -18,14 +18,14 @@ export default function LessonDetail() {
   };
 
   const handldeShowAll = () => {
-    setIsShowDe(!isShowDe);
+    setIsShowAssignment(!isShowAssignment);
     setIsShowPseudo(!isShowPseudo);
   };
 
   return (
     <main className="overflow-hidden pt-[41px]">
       <div className="h-dvh w-full px-2 py-2">
-        {!isShowDe && !isShowPseudo ? (
+        {!isShowAssignment && !isShowPseudo ? (
           <div className="flex h-full flex-row gap-2">
             <div
               className="flex h-full w-8 items-center justify-center rounded-xl border border-outline bg-primary-container"
@@ -48,7 +48,7 @@ export default function LessonDetail() {
             className="w-full"
           >
             <Panel minSize={20} maxSize={50} defaultSize={50} className=" ">
-              {isShowDe && isShowPseudo ? (
+              {isShowAssignment && isShowPseudo ? (
                 <PanelGroup
                   autoSaveId="example2"
                   direction="vertical"
@@ -60,7 +60,7 @@ export default function LessonDetail() {
                     defaultSize={50}
                     className=""
                   >
-                    <EBDe onCollapse={handleCollapseOrExpandDe} />
+                    <EBAssignment onCollapse={handleCollapseOrExpandDe} />
                   </Panel>
                   <PanelResizeHandle className="h-2 bg-on-primary" />
                   <Panel defaultSize={50} className="">
@@ -69,8 +69,8 @@ export default function LessonDetail() {
                 </PanelGroup>
               ) : (
                 <div className="flex h-full w-full flex-col gap-2">
-                  {isShowDe ? (
-                    <EBDe onCollapse={handleCollapseOrExpandDe} />
+                  {isShowAssignment ? (
+                    <EBAssignment onCollapse={handleCollapseOrExpandDe} />
                   ) : (
                     <div
                       className="flex h-8 w-full items-center justify-center rounded-xl border border-outline bg-primary-container"

@@ -57,9 +57,16 @@ const MarkdownEditor = forwardRef<MarkdownEditorHandle, MarkdownEditorProps>(
                 }
               },
               {
-                key: 'Mod-i',
+                key: 'Mod-t',
                 run: () => {
-                  handleAddFormatting('_');
+                  handleAddFormatting('*');
+                  return true;
+                }
+              },
+              {
+                key: 'Alt-=',
+                run: () => {
+                  handleAddFormatting('$');
                   return true;
                 }
               }
@@ -98,9 +105,21 @@ const MarkdownEditor = forwardRef<MarkdownEditorHandle, MarkdownEditorProps>(
         addText(text: string) {
           if (editorViewRef.current) {
             const { state } = editorViewRef.current;
+
+            // Kiểm tra xem vị trí con trỏ (selection) có tồn tại không
+            const cursorPos = state.selection.main.empty
+              ? state.selection.main.from
+              : state.doc.length; // Nếu không có con trỏ, đặt vào cuối tài liệu
+
+            // Tạo một transaction để thêm văn bản
             const transaction = state.update({
-              changes: { from: state.selection.main.from, insert: text }
+              changes: {
+                from: cursorPos === 0 ? state.doc.length : cursorPos,
+                insert: text
+              }
             });
+
+            // Dispatch transaction để cập nhật văn bản
             editorViewRef.current.dispatch(transaction);
           }
         }

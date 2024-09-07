@@ -1,8 +1,9 @@
 import { classNames } from './classNames';
-import EBDe from './EditorBlock/EBDe';
+import EBAssignment from './EditorBlock/EBAssignment';
 import EBPseudo from './EditorBlock/EBPseudo';
 import Preview from './Preview/Preview';
 import PreviewRun from './Preview/PreviewRun';
 
 export { classNames };
-export { EBDe, EBPseudo, Preview, PreviewRun };
+export { EBAssignment, EBPseudo };
+export { Preview, PreviewRun };
