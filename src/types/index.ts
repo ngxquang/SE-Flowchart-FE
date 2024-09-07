@@ -1,4 +1,18 @@
+import { classNames } from './../components/classNames';
 import { ReactNode } from "react";
+
+export type InputProps = {
+  title: string;
+  valid?: 'default' | 'error' | 'success';
+  placeholder?: string;
+  value?: string;
+  radioValues?: string[];
+  readOnly?: boolean;
+  onChange: (e: any) => void;
+  required?: boolean;
+  type?: string;
+  suport?: string;
+};
 
 export type ButtonProps = {
     content?: string;
@@ -9,3 +23,4 @@ export type ButtonProps = {
     iconRight?: ReactNode | null;
     onClick?: () => void;
   }
+
