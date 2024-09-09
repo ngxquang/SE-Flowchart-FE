@@ -15,6 +15,7 @@ const config: Config = {
       },
       fontFamily: {
         lato: ["var(--font-lato)"],
+        roboto_slab: ["var(--font-roboto-slab)"]
       },
     },
     colors: {
