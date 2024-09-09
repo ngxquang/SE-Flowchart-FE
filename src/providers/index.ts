@@ -1,3 +1,4 @@
 import AppProvider from './AppProvider';
+import LessonProvider from './LessonProvider';
 
-export { AppProvider };
+export { AppProvider, LessonProvider };
