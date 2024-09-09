@@ -1,5 +1,5 @@
 import { classNames } from './../components/classNames';
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export type InputProps = {
   title: string;
@@ -15,12 +15,23 @@ export type InputProps = {
 };
 
 export type ButtonProps = {
-    content?: string;
-    className?: string;
-    isPrimary?: boolean;
-    isDisabled?: boolean;
-    iconLeft?: ReactNode | null;
-    iconRight?: ReactNode | null;
-    onClick?: () => void;
-  }
+  content?: string;
+  className?: string;
+  isPrimary?: boolean;
+  isDisabled?: boolean;
+  iconLeft?: ReactNode | null;
+  iconRight?: ReactNode | null;
+  onClick?: () => void;
+};
 
+export type ExerciseType = {
+  title: string;
+  url: string;
+};
+
+export type ListExerciseType = {
+  titleChuong: string;
+  Exercises: ExerciseType[];
+};
+
+export type ListMucType = ListExerciseType[];
