@@ -6,8 +6,8 @@ import { EBAssignment, EBPseudo, Preview } from '@/components';
 import { useState } from 'react';
 
 export default function LessonDetail() {
-  const [isShowAssignment, setIsShowAssignment] = useState(false);
-  const [isShowPseudo, setIsShowPseudo] = useState(false);
+  const [isShowAssignment, setIsShowAssignment] = useState(true);
+  const [isShowPseudo, setIsShowPseudo] = useState(true);
 
   const handleCollapseOrExpandDe = () => {
     setIsShowAssignment(!isShowAssignment);
@@ -26,6 +26,7 @@ export default function LessonDetail() {
     <main className="overflow-hidden pt-[41px]">
       <div className="h-dvh w-full px-2 py-2">
         {!isShowAssignment && !isShowPseudo ? (
+          // Full Preview / Non-resizable Preview
           <div className="flex h-full flex-row gap-2">
             <div
               className="flex h-full w-8 items-center justify-center rounded-xl border border-outline bg-primary-container"
@@ -42,18 +43,22 @@ export default function LessonDetail() {
             <Preview />
           </div>
         ) : (
+          // Resizale Preview
           <PanelGroup
             autoSaveId="example"
             direction="horizontal"
             className="w-full"
           >
+            {/* Left panel */}
             <Panel minSize={20} maxSize={50} defaultSize={50} className=" ">
               {isShowAssignment && isShowPseudo ? (
+                // Resizale
                 <PanelGroup
                   autoSaveId="example2"
                   direction="vertical"
                   className="w-full"
                 >
+                  {/* Top-left panel */}
                   <Panel
                     minSize={20}
                     maxSize={80}
@@ -63,12 +68,15 @@ export default function LessonDetail() {
                     <EBAssignment onCollapse={handleCollapseOrExpandDe} />
                   </Panel>
                   <PanelResizeHandle className="h-2 bg-on-primary" />
+                  {/* Bottom-left panel */}
                   <Panel defaultSize={50} className="">
                     <EBPseudo onCollapse={handldeCollapseOrExpandPseudo} />
                   </Panel>
                 </PanelGroup>
               ) : (
+                // Non-resizale
                 <div className="flex h-full w-full flex-col gap-2">
+                  {/* Top-left */}
                   {isShowAssignment ? (
                     <EBAssignment onCollapse={handleCollapseOrExpandDe} />
                   ) : (
@@ -85,6 +93,7 @@ export default function LessonDetail() {
                       />
                     </div>
                   )}
+                  {/* Bottom-left */}
                   {isShowPseudo ? (
                     <EBPseudo onCollapse={handldeCollapseOrExpandPseudo} />
                   ) : (
@@ -105,6 +114,7 @@ export default function LessonDetail() {
               )}
             </Panel>
             <PanelResizeHandle className="w-2" />
+            {/* Right panel */}
             <Panel defaultSize={50} className="">
               <Preview />
             </Panel>

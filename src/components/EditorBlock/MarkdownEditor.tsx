@@ -17,6 +17,7 @@ interface MarkdownEditorProps {
 // Define the type for the ref, specifying the focus method
 interface MarkdownEditorHandle {
   focus: () => void;
+  addFormatting: (text: string) => void;
   addText: (text: string) => void;
 }
 
@@ -102,6 +103,9 @@ const MarkdownEditor = forwardRef<MarkdownEditorHandle, MarkdownEditorProps>(
         focus() {
           editorViewRef.current?.focus();
         },
+        addFormatting(text: string) {
+          handleAddFormatting(text);
+        },
         addText(text: string) {
           if (editorViewRef.current) {
             const { state } = editorViewRef.current;
@@ -109,7 +113,7 @@ const MarkdownEditor = forwardRef<MarkdownEditorHandle, MarkdownEditorProps>(
             // Kiểm tra xem vị trí con trỏ (selection) có tồn tại không
             const cursorPos = state.selection.main.empty
               ? state.selection.main.from
-              : state.doc.length; // Nếu không có con trỏ, đặt vào cuối tài liệu
+              : state.selection.main.to; // Nếu không có con trỏ, đặt vào cuối tài liệu
 
             // Tạo một transaction để thêm văn bản
             const transaction = state.update({

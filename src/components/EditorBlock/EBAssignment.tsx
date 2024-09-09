@@ -6,10 +6,10 @@ import { LessonContext } from '@/contexts';
 const EBAssignment = ({ onCollapse }: { onCollapse: () => void }) => {
   const editorRef = useRef<{
     focus: () => void;
+    addFormatting: (text: string) => void;
     addText: (text: string) => void;
   } | null>(null);
   const { markdown, setMarkdown } = useContext(LessonContext);
-  const [editorKey, setEditorKey] = useState(0);
 
   const handleFocus = () => {
     console.log('🚀 ~ handleFocus ~ editorRef.current:', editorRef.current);
@@ -20,36 +20,36 @@ const EBAssignment = ({ onCollapse }: { onCollapse: () => void }) => {
 
   const handleBold = () => {
     if (editorRef.current) {
-      editorRef.current.addText(' **bold text**');
-      forceReRender();
+      editorRef.current.addFormatting('**');
+      handleFocus();
     }
   };
 
   const handleItalic = () => {
     if (editorRef.current) {
-      editorRef.current.addText(' *italic text*');
-      forceReRender();
+      editorRef.current.addFormatting('*');
+      handleFocus();
     }
   };
 
   const handleEQ = () => {
     if (editorRef.current) {
       editorRef.current.addText(' $Type \\ equation \\ here$');
-      forceReRender();
+      handleFocus();
     }
   };
 
   const handleGreekLetter = (letter: string): void => {
     if (editorRef.current) {
       editorRef.current.addText(letter);
-      forceReRender();
+      handleFocus();
     }
   };
 
   const handleMult = () => {
     if (editorRef.current) {
       editorRef.current.addText(' ×');
-      forceReRender();
+      handleFocus();
     }
   };
 
@@ -57,7 +57,7 @@ const EBAssignment = ({ onCollapse }: { onCollapse: () => void }) => {
     if (editorRef.current) {
       const newText = ' $\\sqrt{x}$';
       editorRef.current.addText(newText);
-      forceReRender();
+      handleFocus();
     }
   };
 
@@ -65,7 +65,7 @@ const EBAssignment = ({ onCollapse }: { onCollapse: () => void }) => {
     if (editorRef.current) {
       const newText = ' $\\sqrt[n]{x}$';
       editorRef.current.addText(newText);
-      forceReRender();
+      handleFocus();
     }
   };
 
@@ -73,7 +73,7 @@ const EBAssignment = ({ onCollapse }: { onCollapse: () => void }) => {
     if (editorRef.current) {
       const newText = ' $\\frac{a}{b}$';
       editorRef.current.addText(newText);
-      forceReRender();
+      handleFocus();
     }
   };
 
@@ -86,18 +86,15 @@ d + e = f
 \\end{cases}
 $`;
       editorRef.current.addText(newText);
-      forceReRender();
+      handleFocus();
     }
   };
 
-  const forceReRender = () => {
-    setEditorKey((prevKey) => prevKey + 1);
-  };
-
   return (
-    <div className="h-full w-full overflow-hidden rounded-xl border border-outline">
-      <div className="relative flex items-center justify-between gap-4 bg-primary-container px-3 py-2">
-        <div className="flex flex-row gap-3">
+    <div className="relative flex h-full w-full flex-col overflow-hidden rounded-xl border border-outline">
+      {/* Quick Access Toolbar */}
+      <div className="relative mr-8 flex flex-shrink-0 items-center justify-between gap-4 overflow-x-auto scroll-smooth bg-primary-container px-2 py-2 focus:scroll-auto">
+        <div className=" flex select-none flex-row flex-nowrap gap-3">
           <div
             onClick={handleBold}
             className="flex h-6 w-8 items-center justify-center rounded-full bg-primary hover:cursor-pointer hover:bg-primary/50"
@@ -203,24 +200,28 @@ $`;
             </span>
           </div>
         </div>
-        <div className="absolute right-0 bg-primary-container p-2">
-          <div
-            className="flex size-6 justify-center rounded-full border border-primary "
-            onClick={onCollapse}
-          >
-            <Image
-              alt="dropdown-icon"
-              src={'/icons/up.svg'}
-              width={10}
-              height={5}
-              className="select-none"
-            />
-          </div>
+      </div>
+      {/* Button collapse editor */}
+      <div className="absolute right-0 top-0 bg-primary-container p-2">
+        <div
+          className="flex size-6 justify-center rounded-full border border-primary "
+          onClick={onCollapse}
+        >
+          <Image
+            alt="dropdown-icon"
+            src={'/icons/up.svg'}
+            width={10}
+            height={5}
+            className="select-none"
+          />
         </div>
       </div>
-      <div className="h-[90%] w-full overflow-x-auto" onClick={handleFocus}>
+      {/* Editor */}
+      <div
+        className="flex h-full w-full flex-grow overflow-hidden overflow-y-auto"
+        onClick={handleFocus}
+      >
         <MarkdownEditor
-          key={editorKey}
           ref={editorRef}
           value={markdown}
           onChange={setMarkdown}

@@ -11,6 +11,7 @@ const Preview = () => {
   const { markdown } = useContext(LessonContext);
   return (
     <div className="flex h-full w-full flex-col overflow-hidden rounded-xl">
+      {/* Header */}
       <div className="flex items-center  justify-center bg-primary-container px-3 py-2">
         <div className="flex size-6 justify-center rounded-full border border-primary ">
           <Image
@@ -22,6 +23,7 @@ const Preview = () => {
           />
         </div>
       </div>
+      {/* Preview */}
       <div className=" m-2 flex-grow overflow-x-auto">
         <Markdown
           className={`font-roboto_slab`}
@@ -91,6 +93,7 @@ const Preview = () => {
           {markdown}
         </Markdown>
       </div>
+      {/* Footer */}
       <footer className="flex w-full flex-row-reverse bg-primary-container px-5 py-3">
         <div className="flex flex-row rounded-full bg-secondary px-4 py-2 text-on-secondary shadow-lg ">
           <span className="mr-3 font-medium">Chạy từng bước</span>
