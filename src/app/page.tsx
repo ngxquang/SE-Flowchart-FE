@@ -1,3 +1,5 @@
+'use client';
+
 import { useContext } from 'react';
 import { AppContext } from '@/contexts';
 import { classNames } from '@/components';
