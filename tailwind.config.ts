@@ -34,6 +34,9 @@ const config: Config = {
       'erorr': '#D32F2F',
       'surface': '#FFFFFF',
       'surface-variant': '#FFD2C1',
+      'error': '#D32F2F',
+      'success': '#388E3C',
+
     },
   },
   plugins: [],
