@@ -1,4 +1,4 @@
-import ChuongDroplist from '@/components/DropList_SV/Chuong'; 
+import ChuongDroplist from '@/components/DropList_SV/ChuongDroplist'; 
 import { ListExerciseType, ListMucType } from '@/types';
 
 export default function DropListSV({ ListDeMuc }: { ListDeMuc: ListMucType }) {

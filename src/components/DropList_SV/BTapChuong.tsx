@@ -1,17 +1,18 @@
 'use client';
-import { classNames } from '@/components/classNames';
+import { classNames } from '@/components';
 import { useRouter } from 'next/navigation';
+import { ArrowRightIcon } from '@heroicons/react/24/solid';
 
-export default function ExerciseComp({
+export default function BTapChuong({
   ExerciseTitle,
-  url
+  href
 }: {
   ExerciseTitle: string;
-  url: string;
+  href: string;
 }) {
   const route = useRouter();
   const navigateExercise = () => {
-    route.push(`/${url}`);
+    route.push(`/${href}`);
   };
 
   return (
@@ -33,20 +34,7 @@ export default function ExerciseComp({
             "flex items-center justify-center p-2 rounded-full border-2 border-outline-focus"
           )}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className={classNames('size-4')}
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-            />
-          </svg>
+          <ArrowRightIcon className={classNames('size-4')}/>
         </div>
       </div>
     </div>
