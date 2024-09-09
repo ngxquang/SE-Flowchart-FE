@@ -1,3 +1,4 @@
 import AppContext from './AppContext';
+import LessonContext from './LessonContext';
 
-export { AppContext };
+export { AppContext, LessonContext };
