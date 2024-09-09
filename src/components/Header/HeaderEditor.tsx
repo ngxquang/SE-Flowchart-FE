@@ -15,7 +15,7 @@ function HeaderEditor({
                         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                     </svg>
                 </button>
-                <img src="/images/UITTogether.ico" alt="favicon" className="h-11 w-11 " />
+                <img src="/icons/lab-logo.svg" alt="favicon" className="h-11 w-11 " />
                 <p className="pl-4 2xl:pl-7 text-on-primary font-semibold text-base">F C V I S U A L I Z E</p>
             </div>
 
