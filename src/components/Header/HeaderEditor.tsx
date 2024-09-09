@@ -1,11 +1,10 @@
 import React from 'react'
 import Image from 'next/image';
+import { HeaderProps } from '@/types';
 
-interface HeaderEditorProps {
-    title: string;
-}
-
-function HeaderEditor({ title }: HeaderEditorProps) {
+function HeaderEditor({
+    title,
+  }: HeaderProps) {
     return (
         <div className="bg-primary w-full flex flex-row items-center justify-between">
 

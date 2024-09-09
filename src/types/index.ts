@@ -15,12 +15,15 @@ export type InputProps = {
 };
 
 export type ButtonProps = {
-    content?: string;
-    className?: string;
-    isPrimary?: boolean;
-    isDisabled?: boolean;
-    iconLeft?: ReactNode | null;
-    iconRight?: ReactNode | null;
-    onClick?: () => void;
-  }
+  content?: string;
+  className?: string;
+  isPrimary?: boolean;
+  isDisabled?: boolean;
+  iconLeft?: ReactNode | null;
+  iconRight?: ReactNode | null;
+  onClick?: () => void;
+};
 
+export type HeaderProps = {
+  title?:string;
+};
