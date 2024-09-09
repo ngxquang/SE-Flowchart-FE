@@ -3,14 +3,16 @@
 import { useContext } from 'react';
 import { AppContext } from '@/contexts';
 import { classNames } from '@/components';
-import Search from '@/components/Search/Search';
 
 export default function Home() {
   const { state, setState } = useContext(AppContext);
 
   return (
-    <main>
-      <Search/>
+    <main
+      className={classNames(
+        'min-w-screen relative flex flex-col items-center justify-center px-4 py-1'
+      )}
+    >
       <p>{state}</p>
       <button className="" onClick={() => setState('world')}>
         change
