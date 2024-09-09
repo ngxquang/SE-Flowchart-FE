@@ -26,7 +26,7 @@ export type ButtonProps = {
 
 export type ExerciseType = {
   title: string;
-  url: string;
+  href: string;
 };
 
 export type ListExerciseType = {
