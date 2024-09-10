@@ -39,3 +39,9 @@ export type ListExerciseType = {
 };
 
 export type ListMucType = ListExerciseType[];
+
+export type ChapterCardType = {
+  id: number | string;
+  title: string;
+  content: string;
+}
