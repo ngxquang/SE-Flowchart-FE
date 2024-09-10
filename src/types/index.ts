@@ -24,6 +24,10 @@ export type ButtonProps = {
   onClick?: () => void;
 };
 
+export type HeaderProps = {
+  title?:string;
+};
+
 export type ExerciseType = {
   title: string;
   href: string;
