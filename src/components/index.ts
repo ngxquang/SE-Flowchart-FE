@@ -8,7 +8,9 @@ import ButtonOutline from './Button/ButtonOutline';
 import ButtonSolid from './Button/ButtonSolid';
 import Input from './Input/Input';
 import InputRadio from './Input/InputRadio';
-import DropListSV from '@/components/DropList_SV/DropListSV;
+import HeaderEditor from './Header/HeaderEditor';
+import HeaderNormal from './Header/HeaderNormal';
+import DropListSV from '@/components/DropList_SV/DropListSV';
 import Search from './Search';
 
 export { classNames };
@@ -17,4 +19,5 @@ export { Input, InputRadio };
 export { DropListSV };
 export { EBAssignment, EBPseudo };
 export { Preview, PreviewRun };
+export {HeaderEditor, HeaderNormal};
 export {Search};
