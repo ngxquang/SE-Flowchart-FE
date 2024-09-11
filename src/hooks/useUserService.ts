@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { getUsers, getUser } from '@/services/userApi';
+import { getUsers, getUser } from '@/services/userService';
 
 const fetcherGetUser = (id: number) => getUser(id);
 
