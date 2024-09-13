@@ -1,3 +1,5 @@
+'use client'
+
 import AppContext from './AppContext';
 import LessonContext from './LessonContext';
 
