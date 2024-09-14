@@ -18,7 +18,7 @@ export default function ChapterListScreen() {
           id={chapter.id}
           title={chapter.title}
           content={chapter.content}
-          url={`/chapter/${chapter.id}/sv`}
+          href={`/chapter/${chapter.id}/sv`}
         />
       ))}
     </div>
