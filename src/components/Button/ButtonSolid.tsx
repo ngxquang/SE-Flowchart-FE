@@ -6,9 +6,10 @@ const ButtonSolid = ({
   content,
   isPrimary = false,
   isDisabled = false,
+  className = '',
   iconLeft,
   iconRight,
-  onClick,
+  onClick
 }: ButtonProps) => {
   return (
     <ButtonBase
@@ -19,9 +20,8 @@ const ButtonSolid = ({
       onClick={onClick}
       className={classNames(
         'text-on-primary',
-        isPrimary
-          ? 'bg-secondary'
-          : 'bg-primary'
+        isPrimary ? 'bg-secondary' : 'bg-primary',
+        className
       )}
     />
   );
