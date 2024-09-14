@@ -13,6 +13,8 @@
     "@codemirror/state": "^6.4.1",
     "@codemirror/view": "^6.33.0",
     "@heroicons/react": "^2.1.5",
+    "axios": "^1.7.7",
+    "codemirror": "^6.0.1",
     "@nextui-org/modal": "^2.0.39",
     "@nextui-org/react": "^2.4.6",
     "codemirror": "^6.0.1",
@@ -23,7 +25,8 @@
     "react-resizable-panels": "^2.1.2",
     "rehype-katex": "^7.0.1",
     "remark-gfm": "^4.0.0",
-    "remark-math": "^6.0.0"
+    "remark-math": "^6.0.0",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "@types/node": "^20",

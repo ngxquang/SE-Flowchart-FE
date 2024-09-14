@@ -24,6 +24,10 @@ export type ButtonProps = {
   onClick?: () => void;
 };
 
+export type HeaderProps = {
+  title?: string | string[];
+};
+
 export type ExerciseType = {
   title: string;
   href: string;
@@ -39,3 +43,9 @@ export type Modal_taoBTProps = {
 };
 
 export type ListMucType = ListExerciseType[];
+
+export type ChapterCardType = {
+  id: number | string;
+  title: string;
+  content: string;
+};

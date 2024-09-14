@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <main
       className={classNames(
-        'min-w-screen  relative flex flex-col items-center justify-center px-4 py-1'
+        'min-w-screen relative flex flex-col items-center justify-center px-4 py-1'
       )}
     >
       <p>{state}</p>

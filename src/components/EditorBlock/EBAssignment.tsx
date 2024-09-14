@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image';
 import React, { useContext, useState, useRef, useEffect } from 'react';
 import MarkdownEditor from './MarkdownEditor';
