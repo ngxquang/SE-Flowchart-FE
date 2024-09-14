@@ -17,6 +17,7 @@ interface MarkdownEditorProps {
 // Define the type for the ref, specifying the focus method
 interface MarkdownEditorHandle {
   focus: () => void;
+  clearContent: () => void;
   addFormatting: (text: string) => void;
   addText: (text: string) => void;
 }
@@ -102,6 +103,21 @@ const MarkdownEditor = forwardRef<MarkdownEditorHandle, MarkdownEditorProps>(
       () => ({
         focus() {
           editorViewRef.current?.focus();
+        },
+        clearContent() {
+          if (editorViewRef.current) {
+            const { state } = editorViewRef.current;
+
+            const transaction = state.update({
+              changes: {
+                from: 0,
+                to: state.doc.length,
+                insert: ''
+              }
+            });
+
+            editorViewRef.current.dispatch(transaction);
+          }
         },
         addFormatting(text: string) {
           handleAddFormatting(text);

@@ -3,11 +3,40 @@
 import Image from 'next/image';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import { EBAssignment, EBPseudo, Preview } from '@/components';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { useGetLessons } from '@/hooks';
+import { LessonContext } from '@/contexts';
 
 export default function LessonDetail() {
-  const [isShowAssignment, setIsShowAssignment] = useState(true);
-  const [isShowPseudo, setIsShowPseudo] = useState(true);
+  const [isShowAssignment, setIsShowAssignment] = useState(false);
+  const [isShowPseudo, setIsShowPseudo] = useState(false);
+
+  const { markdown, setMarkdown } = useContext(LessonContext);
+  const { data, error, isLoading } = useGetLessons();
+
+  useEffect(() => {
+    if (isLoading) setMarkdown('...loading...');
+    if (data) {
+      const initData = data.data[0].description;
+      setMarkdown(initData);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (data) {
+      setIsShowAssignment(true);
+      setIsShowPseudo(true);
+    }
+  }, [data]);
+
+  // useEffect(() => {
+  //   if (markdown) {
+  //     let newMark = markdown;
+  //     if (typeof newMark === 'string') {
+  //       newMark = newMark.replace(/\\/g, '\\\\');
+  //     }
+  //   }
+  // }, [markdown]);
 
   const handleCollapseOrExpandDe = () => {
     setIsShowAssignment(!isShowAssignment);
@@ -23,7 +52,7 @@ export default function LessonDetail() {
   };
 
   return (
-    <main className="overflow-hidden pt-[41px]">
+    <main className="overflow-hidden">
       <div className="h-dvh w-full px-2 py-2">
         {!isShowAssignment && !isShowPseudo ? (
           // Full Preview / Non-resizable Preview
