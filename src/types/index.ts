@@ -1,5 +1,16 @@
 import { classNames } from './../components/classNames';
 import { ReactNode } from 'react';
+import {
+  FlowNode,
+  StartNode,
+  EndNode,
+  InputNode,
+  OutputNode,
+  ProcessNode,
+  WhileNode,
+  ConditionNode,
+  TempNode
+} from './FlowNode';
 
 export type InputProps = {
   title: string;
@@ -44,4 +55,33 @@ export type ChapterCardType = {
   id: number | string;
   title: string;
   content: string;
+};
+
+export interface IFlowchartConfig {
+  rectangleWidth: number;
+  rectangleHeight: number;
+  arrowWidth: number;
+  arrowHeight: number;
+  lineWidth: number;
+  lineHeight: number;
+  circleRadius: number;
+  fontFamily: string;
+  fontColor: string;
+}
+
+export interface IFlowchartPosition {
+  id: string;
+  title: string;
+}
+
+export {
+  FlowNode,
+  StartNode,
+  EndNode,
+  InputNode,
+  OutputNode,
+  ProcessNode,
+  WhileNode,
+  ConditionNode,
+  TempNode
 };
