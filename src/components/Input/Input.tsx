@@ -11,7 +11,7 @@ function Input({
   onChange,
   required = false,
   type = 'text',
-  suport,
+  suport
 }: InputProps) {
   const handleInputChange = (e: any) => {
     const value = e.target.value;
@@ -28,12 +28,12 @@ function Input({
   return (
     <div className="relative my-2">
       <p className="absolute -top-2 left-2 bg-surface px-1 text-center text-xs text-outline">
-        {title} <span className='text-error'> {required && "*"} </span>
+        {title} <span className="text-error"> {required && '*'} </span>
       </p>
       <input
         className={classNames(
           'w-full rounded border bg-surface p-2 focus:border-outline-focus focus:outline focus:outline-4 focus:outline-primary-container',
-          borderClass,
+          borderClass
         )}
         value={value}
         placeholder={placeholder}
@@ -50,14 +50,16 @@ function Input({
       {valid === 'success' && (
         <CheckIcon className="absolute right-2 top-2 h-6 w-6 text-success" />
       )}
-      <p
-        className={classNames(
-          'h-4 pl-1 text-xs',
-          suport ? 'visible' : 'invisible'
-        )}
-      >
-        {suport}
-      </p>
+      {suport && (
+        <p
+          className={classNames(
+            'h-4 pl-1 text-xs',
+            valid === 'error' ? 'text-error' : ''
+          )}
+        >
+          {suport}
+        </p>
+      )}
     </div>
   );
 }

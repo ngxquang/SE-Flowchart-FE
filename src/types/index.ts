@@ -34,4 +34,8 @@ export type ListExerciseType = {
   Exercises: ExerciseType[];
 };
 
+export type Modal_taoBTProps = {
+  onSubmit?: () => void;
+};
+
 export type ListMucType = ListExerciseType[];

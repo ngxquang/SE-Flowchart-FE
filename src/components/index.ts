@@ -8,7 +8,7 @@ import ButtonOutline from './Button/ButtonOutline';
 import ButtonSolid from './Button/ButtonSolid';
 import Input from './Input/Input';
 import InputRadio from './Input/InputRadio';
-import Modal_taoBT from './Modal/Modal_taoBT';
+import Modal_taoBT from './Modal';
 
 export { classNames };
 export { ButtonBase, ButtonSolid, ButtonOutline };
