@@ -12,9 +12,9 @@ function ChapterCard({ id, title, content, url }: ChapterCardType) {
     >
       <div className="flex flex-grow flex-col">
         <h3 className="ml-2 text-lg font-light uppercase">{title}</h3>
-        <h1 className="ml-2 text-4xl font-medium uppercase">{content}</h1>
+        <h1 className="ml-2 py-4 text-4xl font-medium uppercase">{content}</h1>
       </div>
-      <div className="flex justify-end">
+      <div className="flex justify-end pt-8">
         <span className="group-hover:hidden">
           <ButtonOutline content="Truy cập" />
         </span>
