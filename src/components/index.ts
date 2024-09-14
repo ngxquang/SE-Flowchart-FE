@@ -13,6 +13,7 @@ import HeaderEditor from './Header/HeaderEditor';
 import HeaderNormal from './Header/HeaderNormal';
 import DropListSV from '@/components/DropList_SV/DropListSV';
 import Search from './Search';
+import ChapterCard from './ChapterCard';
 
 export { classNames };
 export { ButtonBase, ButtonSolid, ButtonOutline };
@@ -23,3 +24,4 @@ export { EBAssignment, EBPseudo };
 export { Preview, PreviewRun };
 export { HeaderEditor, HeaderNormal };
 export { Search };
+export { ChapterCard };
