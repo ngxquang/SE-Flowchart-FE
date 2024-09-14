@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function List() {
+export default function ChapterListScreen() {
   const chapters = [
     { id: 1, title: 'Chương 1' },
     { id: 2, title: 'Chương 2' }

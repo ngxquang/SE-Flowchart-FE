@@ -25,7 +25,7 @@ export type ButtonProps = {
 };
 
 export type HeaderProps = {
-  title?:string;
+  title?: string | string[];
 };
 
 export type ExerciseType = {
@@ -44,4 +44,4 @@ export type ChapterCardType = {
   id: number | string;
   title: string;
   content: string;
-}
+};
