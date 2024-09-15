@@ -9,9 +9,11 @@ import 'katex/dist/katex.min.css';
 import { useAddLesson } from '@/hooks';
 import { CreateLessonDto } from '@/dto/create-lesson';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
+import FlowchartStatic from '../Flowchart/FlowchartStatic';
+import { checkPseudocodeSyntax } from '@/helpers';
 
 const Preview = () => {
-  const { markdown } = useContext(LessonContext);
+  const { markdown, pseudo } = useContext(LessonContext);
   const { addLesson } = useAddLesson();
 
   const handleStoreAssignment = async () => {
@@ -111,6 +113,17 @@ const Preview = () => {
         >
           {markdown}
         </Markdown>
+        <div className="flex h-full w-full items-start justify-center">
+          {pseudo && checkPseudocodeSyntax(pseudo) === 'Cú pháp hợp lệ.' ? (
+            <FlowchartStatic pseudo={pseudo} />
+          ) : (
+            pseudo && (
+              <div className="font-roboto_slab">
+                {checkPseudocodeSyntax(pseudo)}
+              </div>
+            )
+          )}
+        </div>
       </div>
       {/* Footer */}
       <footer className="flex w-full flex-row-reverse bg-primary-container px-5 py-3">

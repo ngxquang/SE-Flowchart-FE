@@ -11,6 +11,9 @@ import {
   ConditionNode,
   TempNode
 } from './FlowNode';
+import { FlowchartConfigurer } from './FlowchartConfigurer';
+import { FlowchartPositions } from './FlowchartPositions';
+import { Flowchart } from './Flowchart';
 
 export type InputProps = {
   title: string;
@@ -57,6 +60,10 @@ export type ChapterCardType = {
   content: string;
 };
 
+export type FlowchartProps = {
+  pseudo: string;
+};
+
 export interface IFlowchartConfig {
   rectangleWidth: number;
   rectangleHeight: number;
@@ -85,3 +92,5 @@ export {
   ConditionNode,
   TempNode
 };
+
+export { FlowchartConfigurer, FlowchartPositions, Flowchart };
