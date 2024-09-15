@@ -64,5 +64,6 @@ export type ChapterCardType = {
   id: number | string;
   title: string;
   content: string;
+  href: string;
 };
 
