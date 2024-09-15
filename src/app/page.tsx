@@ -3,7 +3,6 @@
 import { useContext } from 'react';
 import { AppContext } from '@/contexts';
 import { classNames } from '@/components';
-import {Modal_taoBT} from '@/components';
 
 export default function Home() {
   const { state, setState } = useContext(AppContext);
@@ -18,7 +17,6 @@ export default function Home() {
       <button className="" onClick={() => setState('world')}>
         change
       </button>
-      <Modal_taoBT/>
       <p className="font-lato text-6xl font-bold ">Hello</p>
     </main>
   );
