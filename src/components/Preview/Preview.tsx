@@ -6,9 +6,28 @@ import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 import remarkGfm from 'remark-gfm';
 import 'katex/dist/katex.min.css';
+import { useAddLesson } from '@/hooks';
+import { CreateLessonDto } from '@/dto/create-lesson';
+import { ArrowRightIcon } from '@heroicons/react/24/solid';
 
 const Preview = () => {
   const { markdown } = useContext(LessonContext);
+  const { addLesson } = useAddLesson();
+
+  const handleStoreAssignment = async () => {
+    const data: CreateLessonDto = {
+      description: markdown,
+      image: '',
+      status: '0',
+      urlMd: '',
+      flowChart: '',
+      statusFlowChart: '0',
+      lessonGroupId: 1,
+      lessonTypeId: 1
+    };
+    await addLesson(data);
+  };
+
   return (
     <div className="flex h-full w-full flex-col overflow-hidden rounded-xl">
       {/* Header */}
@@ -95,15 +114,12 @@ const Preview = () => {
       </div>
       {/* Footer */}
       <footer className="flex w-full flex-row-reverse bg-primary-container px-5 py-3">
-        <div className="flex flex-row rounded-full bg-secondary px-4 py-2 text-on-secondary shadow-lg ">
+        <div
+          className="flex flex-row rounded-full bg-secondary px-4 py-2 text-on-secondary shadow-lg "
+          onClick={handleStoreAssignment}
+        >
           <span className="mr-3 font-medium">Chạy từng bước</span>
-          <Image
-            alt="dropdown-icon"
-            src={'/icons/arrow-right.svg'}
-            color="white"
-            width={20}
-            height={20}
-          />
+          <ArrowRightIcon width={20} height={20} color="white" />
         </div>
       </footer>
     </div>
