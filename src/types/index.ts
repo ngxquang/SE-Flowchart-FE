@@ -25,7 +25,7 @@ export type ButtonProps = {
 };
 
 export type HeaderProps = {
-  title?:string;
+  title?: string | string[];
 };
 
 export type ExerciseType = {
@@ -59,3 +59,10 @@ export type PaginationProps = {
   siblings: number;
   onPageChange: (page: number | string) => void;
 }
+
+export type ChapterCardType = {
+  id: number | string;
+  title: string;
+  content: string;
+};
+

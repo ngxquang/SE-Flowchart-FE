@@ -19,7 +19,7 @@ const ButtonOutline = ({
       iconRight={iconRight}
       onClick={onClick}
       className={classNames(
-        'border border-outline ',
+        'outline outline-outline outline-1',
         isPrimary
           ? 'hover:border-secondary hover:bg-secondary hover:text-on-secondary'
           : 'hover:border-primary hover:bg-primary hover:text-on-primary',

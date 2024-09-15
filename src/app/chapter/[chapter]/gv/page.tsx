@@ -3,7 +3,7 @@
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 
-export default function ChapterDetail() {
+export default function ChapterDetailScreen() {
   const params = useParams();
   const { chapter } = params; // Lấy giá trị chapter từ URL
 
@@ -15,7 +15,7 @@ export default function ChapterDetail() {
 
   return (
     <div>
-      <h1>Danh sách bài trong chương {chapter}</h1>
+      <h1>Danh sách bài trong chương {chapter} sv</h1>
       <ul>
         {lessons.map((lesson) => (
           <li key={lesson.id}>

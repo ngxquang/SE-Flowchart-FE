@@ -1,11 +1,11 @@
-'use client'
+'use client';
 
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 
-export default function ChapterDetail() {
+export default function ChapterDetailScreen() {
   const params = useParams();
-  const { chapter } = params;  // Lấy giá trị chapter từ URL
+  const { chapter } = params; // Lấy giá trị chapter từ URL
 
   // Giả sử danh sách bài được lấy từ API
   const lessons = [
@@ -15,13 +15,11 @@ export default function ChapterDetail() {
 
   return (
     <div>
-      <h1>Danh sách bài trong chương {chapter}</h1>
+      <h1>Danh sách bài trong chương {chapter} gv</h1>
       <ul>
         {lessons.map((lesson) => (
           <li key={lesson.id}>
-            <Link href={`/sv/${chapter}/${lesson.id}`}>
-              {lesson.title}
-            </Link>
+            <Link href={`/gv/${chapter}/${lesson.id}`}>{lesson.title}</Link>
           </li>
         ))}
       </ul>
