@@ -15,7 +15,7 @@ export default function ChapterDetailScreen() {
 
   return (
     <div>
-      <h1>Danh sách bài trong chương {chapter}</h1>
+      <h1>Danh sách bài trong chương {chapter} gv</h1>
       <ul>
         {lessons.map((lesson) => (
           <li key={lesson.id}>
