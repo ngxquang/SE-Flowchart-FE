@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@codemirror/autocomplete": "^6.18.1",
+    "@codemirror/commands": "^6.6.1",
     "@codemirror/lang-markdown": "^6.2.5",
     "@codemirror/state": "^6.4.1",
     "@codemirror/view": "^6.33.0",
