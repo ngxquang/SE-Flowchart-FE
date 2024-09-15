@@ -49,7 +49,6 @@ export default function Modal_taoBT({
       return;
     }
 
-    // Giả sử đây là nơi bạn sẽ gọi API tìm kiếm
     // Kết quả mẫu
     const filteredResults = resultsList.filter((item) =>
       item.toLowerCase().includes(query.toLowerCase())
@@ -98,7 +97,7 @@ export default function Modal_taoBT({
               <div className=" text-2xl text-on-primary ">Tạo bài tập</div>
             </ModalHeader>
             <ModalBody>
-              <div className="px-8 pt-6 2xl:pt-8 space-y-6">
+              <div className="px-8 pt-6 2xl:pt-8 space-y-4">
                 <div className="relative">
                   <Input
                     title="Nhóm bài"

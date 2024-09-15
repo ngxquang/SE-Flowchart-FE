@@ -50,16 +50,14 @@ function Input({
       {valid === 'success' && (
         <CheckIcon className="absolute right-2 top-2 h-6 w-6 text-success" />
       )}
-      {suport && (
-        <p
-          className={classNames(
-            'h-4 pl-1 text-xs',
-            valid === 'error' ? 'text-error' : ''
-          )}
-        >
-          {suport}
-        </p>
-      )}
+      <p
+        className={classNames(
+          'h-4 pl-1 text-xs',
+          suport ? (valid === 'error' ? 'text-error' : 'visible') : 'invisible'
+        )}
+      >
+        {suport}
+      </p>
     </div>
   );
 }
