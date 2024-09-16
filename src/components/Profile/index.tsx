@@ -130,17 +130,33 @@ export default function Profile({
   };
 
   const isValueButton = (): boolean => {
-    if (
+    // Điều kiện để bật nút: ít nhất một trường hợp lệ, không có trường nào bị lỗi
+    const allFieldsValid =
       inputValid_Tentaikhoan === 'success' &&
       inputValid_Gioitinh === 'success' &&
       inputValid_Email === 'success' &&
       inputValid_Dienthoai === 'success' &&
-      inputValid_Diachi === 'success'
-    ) {
-      return true;
-    }
-    return false;
+      inputValid_Diachi === 'success';
+  
+    const hasError =
+      inputValid_Tentaikhoan === 'error' ||
+      inputValid_Gioitinh === 'error' ||
+      inputValid_Email === 'error' ||
+      inputValid_Dienthoai === 'error' ||
+      inputValid_Diachi === 'error';
+  
+    const atLeastOneValid =
+      inputValid_Tentaikhoan === 'success' ||
+      inputValid_Gioitinh === 'success' ||
+      inputValid_Email === 'success' ||
+      inputValid_Dienthoai === 'success' ||
+      inputValid_Diachi === 'success';
+  
+    // Enable button nếu tất cả hợp lệ hoặc ít nhất một trường hợp lệ và không có lỗi
+    return allFieldsValid || (atLeastOneValid && !hasError);
   };
+  
+  
 
   return (
     <div
@@ -218,7 +234,7 @@ export default function Profile({
       <div className={classNames('flex items-center justify-center')}>
         <ButtonSolid
           content="Lưu thay đổi"
-          isDisabled={isValueButton() === true ? true : false}
+          isDisabled={!isValueButton()}
         />
       </div>
     </div>
