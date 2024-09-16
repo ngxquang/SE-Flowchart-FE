@@ -40,10 +40,31 @@ export type ListExerciseType = {
 
 export type ListMucType = ListExerciseType[];
 
+export type ButtonPropsCusGV = {
+  content?: string;
+  className?: string;
+  isPrimary?: boolean;
+  isDisabled?: boolean;
+  iconLeft?: ReactNode | null;
+  iconRight?: ReactNode | null;
+  onClick?: () => void;
+  index: number;
+  isChoosed: boolean;
+};
+
+export type PaginationProps = {
+  totalPages: number;
+  page: number;
+  limit: number;
+  siblings: number;
+  onPageChange: (page: number | string) => void;
+}
+
 export type ChapterCardType = {
   id: number | string;
   title: string;
   content: string;
+  href: string;
 };
 
 export type MarkdownEditorProps = {
