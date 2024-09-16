@@ -82,3 +82,12 @@ export type MarkdownEditorHandle = {
   addFormatting: (text: string) => void;
   addText: (text: string) => void;
 };
+
+export type ProfileType = {
+  name: string;
+  email: string;
+  username: string;
+  sex: string;
+  phone: string;
+  address: string;
+}
