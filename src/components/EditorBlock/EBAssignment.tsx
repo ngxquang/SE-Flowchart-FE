@@ -1,16 +1,14 @@
-'use client'
+'use client';
 
 import Image from 'next/image';
 import React, { useContext, useState, useRef, useEffect } from 'react';
 import MarkdownEditor from './MarkdownEditor';
 import { LessonContext } from '@/contexts';
+import { MarkdownEditorHandle } from '@/types';
 
 const EBAssignment = ({ onCollapse }: { onCollapse: () => void }) => {
-  const editorRef = useRef<{
-    focus: () => void;
-    addFormatting: (text: string) => void;
-    addText: (text: string) => void;
-  } | null>(null);
+  const editorRef = useRef<MarkdownEditorHandle | null>(null);
+
   const { markdown, setMarkdown } = useContext(LessonContext);
 
   const handleFocus = () => {
