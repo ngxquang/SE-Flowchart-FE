@@ -13,6 +13,7 @@ import HeaderEditor from './Header/HeaderEditor';
 import HeaderNormal from './Header/HeaderNormal';
 import DropListSV from '@/components/DropList_SV/DropListSV';
 import Search from './Search';
+import Modal_taoBT from './Modal';
 import ListGV from '@/components/ListGV';
 import ChapterCard from './ChapterCard';
 
@@ -25,5 +26,6 @@ export { EBAssignment, EBPseudo };
 export { Preview, PreviewRun };
 export { HeaderEditor, HeaderNormal };
 export { Search };
+export { Modal_taoBT};
 export { ListGV };
 export { ChapterCard };
