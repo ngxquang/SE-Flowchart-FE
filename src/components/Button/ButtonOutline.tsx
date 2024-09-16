@@ -6,6 +6,7 @@ const ButtonOutline = ({
   content,
   isPrimary = false,
   isDisabled = false,
+  className = '',
   iconLeft,
   iconRight,
   onClick
@@ -21,7 +22,8 @@ const ButtonOutline = ({
         'outline outline-outline outline-1',
         isPrimary
           ? 'hover:border-secondary hover:bg-secondary hover:text-on-secondary'
-          : 'hover:border-primary hover:bg-primary hover:text-on-primary'
+          : 'hover:border-primary hover:bg-primary hover:text-on-primary',
+          className
       )}
     />
   );
