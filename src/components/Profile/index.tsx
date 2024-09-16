@@ -47,6 +47,14 @@ function isValidPhone(phone: string): boolean {
   return regex.test(phone);
 }
 
+function ValidSex(sex: string): string {
+  if (!sex) return sex;
+
+  const lowerCased = sex.toLowerCase();
+
+  return lowerCased.charAt(0).toUpperCase() + lowerCased.slice(1);
+}
+
 export default function Profile({
   name,
   email,
@@ -91,7 +99,7 @@ export default function Profile({
     'default' | 'success' | 'error'
   >('default');
   const handleInput_Gioitinh = (gioitinh: string) => {
-    setInputValue_Gioitinh(gioitinh);
+    setInputValue_Gioitinh(ValidSex(gioitinh));
     if (gioitinh.trim().length === 0) {
       setInputValid_Gioitinh('default');
     } else if (!['Nam', 'Nữ'].some((value) => value === gioitinh)) {
