@@ -131,11 +131,11 @@ export default function Profile({
 
   const isValueButton = (): boolean => {
     if (
-      inputValid_Tentaikhoan &&
-      inputValid_Gioitinh &&
-      inputValid_Email &&
-      inputValid_Dienthoai &&
-      inputValid_Diachi
+      inputValid_Tentaikhoan === 'success' &&
+      inputValid_Gioitinh === 'success' &&
+      inputValid_Email === 'success' &&
+      inputValid_Dienthoai === 'success' &&
+      inputValid_Diachi === 'success'
     ) {
       return true;
     }
