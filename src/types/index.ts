@@ -67,3 +67,14 @@ export type ChapterCardType = {
   href: string;
 };
 
+export type MarkdownEditorProps = {
+  value: string;
+  onChange: (value: string) => void;
+};
+
+export type MarkdownEditorHandle = {
+  focus: () => void;
+  clearContent: () => void;
+  addFormatting: (text: string) => void;
+  addText: (text: string) => void;
+};
