@@ -17,13 +17,15 @@ const Preview = () => {
   const { addLesson } = useAddLesson();
 
   const handleStoreAssignment = async () => {
+    if (!markdown) return;
+
     const data: CreateLessonDto = {
       description: markdown,
       image: '',
-      status: '0',
-      urlMd: '',
-      flowChart: '',
-      statusFlowChart: '0',
+      status: '1',
+      urlMd: 'https://',
+      flowChart: pseudo,
+      statusFlowChart: pseudo ? '1' : '0',
       lessonGroupId: 1,
       lessonTypeId: 1
     };
@@ -128,7 +130,7 @@ const Preview = () => {
       {/* Footer */}
       <footer className="flex w-full flex-row-reverse bg-primary-container px-5 py-3">
         <div
-          className="flex flex-row rounded-full bg-secondary px-4 py-2 text-on-secondary shadow-lg "
+          className="flex flex-row rounded-full bg-secondary px-4 py-2 text-on-secondary shadow-lg hover:cursor-pointer"
           onClick={handleStoreAssignment}
         >
           <span className="mr-3 font-medium">Chạy từng bước</span>

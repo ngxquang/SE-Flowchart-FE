@@ -29,7 +29,7 @@ export function parsePseudoCode(pseudoCode: string): FlowNode[] {
 
   const stack: FlowNode[][] = [flowNodes]; // Stack để xử lý các khối lệnh lồng nhau
 
-  flowNodes.push(new StartNode());
+  if (lines[0] === 'BEGIN') flowNodes.push(new StartNode());
 
   lines.forEach((line) => {
     if (line.startsWith('INPUT')) {
@@ -85,7 +85,7 @@ export function parsePseudoCode(pseudoCode: string): FlowNode[] {
     }
   });
 
-  flowNodes.push(new EndNode());
+  if (lines[lines.length - 1] === 'END') flowNodes.push(new EndNode());
   console.log('🚀 ~ parsePseudoCode ~ flowNodes:', flowNodes);
 
   return flowNodes;

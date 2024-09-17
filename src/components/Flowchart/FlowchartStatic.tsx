@@ -1,25 +1,28 @@
-import { parsePseudoCode, hasEmptyArray } from '@/helpers';
+import { parsePseudoCode } from '@/helpers';
 import {
   Flowchart,
   FlowchartConfigurer,
   FlowchartPositions,
-  FlowchartProps
+  FlowchartProps,
+  IFlowchartPosition
 } from '@/types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const FlowchartStatic = ({ pseudo }: FlowchartProps) => {
+  const [positions, setPositions] = useState<IFlowchartPosition[][]>([]);
+
   const configurer = new FlowchartConfigurer();
-  configurer.setRectangleSizes(150, 50);
+  configurer.setRectangleSizes(150, 45);
   configurer.setArrowSizes(5, 10);
-  configurer.setLineSizes(50, 50);
+  configurer.setLineSizes(25, 25);
   configurer.setCircleRadius(10);
-  configurer.setFontInfo('18px sans-serif', 'black');
+  configurer.setFontInfo('14px sans-serif', 'black');
 
   useEffect(() => {
     const flowchart = parsePseudoCode(pseudo);
-    if (hasEmptyArray(flowchart)) return;
     const positions = new FlowchartPositions();
     positions.generatePositions(flowchart);
+    setPositions(positions.getAll());
 
     const drawer = new Flowchart(
       positions.getAll(),
@@ -33,7 +36,15 @@ const FlowchartStatic = ({ pseudo }: FlowchartProps) => {
     drawer.drawAllText('Sai');
   }, [pseudo]);
 
-  return <canvas id="myCanvas" className=""></canvas>;
+  return (
+    <canvas
+      style={{
+        width: positions[0]?.length > 3 ? '-webkit-fill-available' : ''
+      }}
+      id="myCanvas"
+      className=""
+    ></canvas>
+  );
 };
 
 export default FlowchartStatic;
