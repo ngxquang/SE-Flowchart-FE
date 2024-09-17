@@ -8,20 +8,7 @@ import { EditorSelection, EditorState } from '@codemirror/state';
 import { EditorView, keymap } from '@codemirror/view';
 import { markdown } from '@codemirror/lang-markdown';
 import { basicSetup } from 'codemirror';
-import { indentWithTab } from '@codemirror/commands';
-
-interface MarkdownEditorProps {
-  value: string;
-  onChange: (value: string) => void;
-}
-
-// Define the type for the ref, specifying the focus method
-interface MarkdownEditorHandle {
-  focus: () => void;
-  clearContent: () => void;
-  addFormatting: (text: string) => void;
-  addText: (text: string) => void;
-}
+import { MarkdownEditorHandle, MarkdownEditorProps } from '@/types';
 
 // const myTheme = EditorView.theme({
 //   '&': {

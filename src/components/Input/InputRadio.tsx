@@ -18,13 +18,12 @@ function InputRadio({
       <div className="relative">
         <Input
           title={title}
-          value={value}
           readOnly={readOnly}
           onChange={onChange}
           required={required}
           suport={suport}
         />
-        <div className="absolute top-4 flex w-full flex-row justify-evenly">
+        <div className="absolute xl:top-2.5 top-3 lg:top-2.5 flex w-full flex-row justify-evenly">
           {radioValues.map((radioValue) => (
             <div className="flex flex-row gap-4">
               <input
