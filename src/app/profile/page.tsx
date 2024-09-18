@@ -2,7 +2,7 @@
 
 import { ProfileType } from '@/types';
 import Image from 'next/image';
-import { ButtonSolid, classNames, Input } from '@/components';
+import { ButtonSolid, Input } from '@/components';
 import { useState } from 'react';
 
 export default function Profile({
@@ -166,9 +166,7 @@ export default function Profile({
 
   return (
     <div
-      className={classNames(
-        'h-full w-full pt-6 sm:max-w-[100%] sm:flex-row md:max-w-[80%] lg:max-w-[60%]'
-      )}
+      className='h-full w-full pt-6 sm:max-w-[100%] sm:flex-row md:max-w-[80%] lg:max-w-[60%]'
     >
       <div className="flex flex-col items-center justify-center gap-4">
         <div className="text-3xl">Tài khoản sinh viên</div>
@@ -183,9 +181,9 @@ export default function Profile({
         <div className="text-xl">@{username}</div>
       </div>
       <div
-        className={classNames('flex flex-col items-center justify-center pt-3')}
+        className='flex flex-col items-center justify-center pt-3'
       >
-        <div className={classNames('w-full')}>
+        <div className='w-full'>
           <Input
             title="Tên tài khoản"
             placeholder="Nhập họ tên người dùng"
@@ -196,7 +194,7 @@ export default function Profile({
           />
         </div>
 
-        <div className={classNames('w-full')}>
+        <div className='w-full'>
           <Input
             title="Email"
             placeholder="Nhập email người dùng"
@@ -207,7 +205,7 @@ export default function Profile({
           />
         </div>
 
-        <div className={classNames('w-full')}>
+        <div className='w-full'>
           <Input
             title="Giới tính"
             placeholder="Nhập giới tính người dùng"
@@ -218,7 +216,7 @@ export default function Profile({
           />
         </div>
 
-        <div className={classNames('w-full')}>
+        <div className='w-full'>
           <Input
             title="Điện thoại"
             placeholder="Nhập số điện thoại người dùng"
@@ -230,7 +228,7 @@ export default function Profile({
           />
         </div>
 
-        <div className={classNames('w-full')}>
+        <div className='w-full'>
           <Input
             title="Địa chỉ"
             placeholder="Nhập địa chỉ người dùng"
@@ -240,7 +238,7 @@ export default function Profile({
           />
         </div>
       </div>
-      <div className={classNames('flex items-center justify-center')}>
+      <div className='flex items-center justify-center'>
         <ButtonSolid content="Lưu thay đổi" isDisabled={isValueButton()} />
       </div>
     </div>
