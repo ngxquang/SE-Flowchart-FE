@@ -1,5 +1,19 @@
 import { classNames } from './../components/classNames';
 import { ReactNode } from 'react';
+import {
+  FlowNode,
+  StartNode,
+  EndNode,
+  InputNode,
+  OutputNode,
+  ProcessNode,
+  WhileNode,
+  ConditionNode,
+  TempNode
+} from './FlowNode';
+import { FlowchartConfigurer } from './FlowchartConfigurer';
+import { FlowchartPositions } from './FlowchartPositions';
+import { Flowchart } from './Flowchart';
 
 export type InputProps = {
   title: string;
@@ -91,3 +105,38 @@ export type ProfileType = {
   phone: string;
   address: string;
 }
+
+export type FlowchartProps = {
+  pseudo: string;
+};
+
+export interface IFlowchartConfig {
+  rectangleWidth: number;
+  rectangleHeight: number;
+  arrowWidth: number;
+  arrowHeight: number;
+  lineWidth: number;
+  lineHeight: number;
+  circleRadius: number;
+  fontFamily: string;
+  fontColor: string;
+}
+
+export interface IFlowchartPosition {
+  id: string;
+  title: string;
+}
+
+export {
+  FlowNode,
+  StartNode,
+  EndNode,
+  InputNode,
+  OutputNode,
+  ProcessNode,
+  WhileNode,
+  ConditionNode,
+  TempNode
+};
+
+export { FlowchartConfigurer, FlowchartPositions, Flowchart };

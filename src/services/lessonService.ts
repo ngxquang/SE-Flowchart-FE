@@ -1,3 +1,4 @@
+import { CreateLessonDto } from '@/dto/create-lesson';
 import axios from '@/libs/axiosInstance';
 
 export const getLessons = async () => {
@@ -20,17 +21,8 @@ export const getLesson = async (id: number) => {
   }
 };
 
-export const addLesson = async ({
-  description,
-  lessonGroupId,
-  lessonTypeId
-}: {
-  description: string;
-  lessonGroupId: number;
-  lessonTypeId: number;
-}) => {
+export const addLesson = async (data: CreateLessonDto) => {
   try {
-    const data = { description, lessonGroupId, lessonTypeId };
     const res = await axios.post(`/lessons`, data);
     return res.data;
   } catch (error) {

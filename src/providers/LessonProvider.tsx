@@ -5,12 +5,15 @@ import { LessonContext } from '@/contexts';
 
 function LessonProvider({ children }: { children: React.ReactNode }) {
   const [markdown, setMarkdown] = useState<string>('');
+  const [pseudo, setPseudo] = useState<string>('');
 
   return (
     <LessonContext.Provider
       value={{
         markdown,
-        setMarkdown
+        setMarkdown,
+        pseudo,
+        setPseudo
       }}
     >
       {children}
