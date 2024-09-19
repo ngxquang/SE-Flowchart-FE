@@ -26,6 +26,6 @@ export { EBAssignment, EBPseudo };
 export { Preview, PreviewRun };
 export { HeaderEditor, HeaderNormal };
 export { Search };
-export { Modal_taoBT};
+export { Modal_taoBT };
 export { ListGV };
 export { ChapterCard };

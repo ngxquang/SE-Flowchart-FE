@@ -97,6 +97,15 @@ export type MarkdownEditorHandle = {
   addText: (text: string) => void;
 };
 
+export type ProfileType = {
+  name: string;
+  email: string;
+  username: string;
+  sex: string;
+  phone: string;
+  address: string;
+}
+
 export type FlowchartProps = {
   pseudo: string;
 };
