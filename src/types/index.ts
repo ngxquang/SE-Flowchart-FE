@@ -76,7 +76,7 @@ export type PaginationProps = {
   limit: number;
   siblings: number;
   onPageChange: (page: number | string) => void;
-}
+};
 
 export type ChapterCardType = {
   id: number | string;
@@ -97,6 +97,17 @@ export type MarkdownEditorHandle = {
   addText: (text: string) => void;
 };
 
+export type PseudoEditorProps = {
+  value: string;
+  onChange: (value: string) => void;
+};
+
+export type PseudoEditorHandle = {
+  focus: () => void;
+  clearContent: () => void;
+  addText: (text: string) => void;
+};
+
 export type ProfileType = {
   name: string;
   email: string;
@@ -104,7 +115,7 @@ export type ProfileType = {
   sex: string;
   phone: string;
   address: string;
-}
+};
 
 export type FlowchartProps = {
   pseudo: string;

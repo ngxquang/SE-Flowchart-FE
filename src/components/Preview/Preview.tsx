@@ -115,16 +115,18 @@ const Preview = () => {
         >
           {markdown}
         </Markdown>
-        <div className="flex h-full w-full items-start justify-center">
-          {pseudo && checkPseudocodeSyntax(pseudo) === 'Cú pháp hợp lệ.' ? (
-            <FlowchartStatic pseudo={pseudo} />
-          ) : (
-            pseudo && (
-              <div className="font-roboto_slab">
-                {checkPseudocodeSyntax(pseudo)}
-              </div>
-            )
-          )}
+        <div className="max-h-fit w-full">
+          <div className="flex items-start justify-center">
+            {pseudo && checkPseudocodeSyntax(pseudo) === 'Cú pháp hợp lệ.' ? (
+              <FlowchartStatic pseudo={pseudo} />
+            ) : (
+              pseudo && (
+                <span className="font-roboto_slab text-erorr">
+                  Please check your code!
+                </span>
+              )
+            )}
+          </div>
         </div>
       </div>
       {/* Footer */}

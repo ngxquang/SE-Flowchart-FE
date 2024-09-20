@@ -1038,7 +1038,7 @@ export class Flowchart {
             );
             break;
           }
-          this.lineLeftLineLeftForIf(prevNode.id, id, 'black', 0.5, 0.5, 2.5);
+          this.lineLeftLineLeftForIf(prevNode.id, id, 'black', 0.5, 0.5, 4);
         }
         break;
       default:
