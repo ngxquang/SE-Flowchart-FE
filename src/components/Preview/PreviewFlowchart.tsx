@@ -1,12 +1,5 @@
-'use client';
-
 import Image from 'next/image';
-import React, {
-  forwardRef,
-  useContext,
-  useImperativeHandle,
-  useState
-} from 'react';
+import React, { useContext, useState } from 'react';
 import { LessonContext } from '@/contexts';
 import FlowchartStatic from '../Flowchart/FlowchartStatic';
 import { checkPseudocodeSyntax } from '@/helpers';
@@ -32,7 +25,7 @@ const PreviewFlowchart = () => {
   };
 
   return (
-    <div className="relative flex h-full w-full flex-col overflow-hidden rounded-xl border border-outline">
+    <div className="relative flex h-full w-full flex-col overflow-hidden rounded-xl">
       {/* Quick Access Toolbar */}
       <div className="flex select-none flex-row justify-around bg-primary-container px-2 py-2">
         <ButtonSolid
@@ -56,7 +49,7 @@ const PreviewFlowchart = () => {
 
       {/* Preview */}
       <div className="flex h-full w-full flex-grow overflow-hidden overflow-y-auto">
-        <div className=" m-2 flex-grow overflow-x-auto">
+        <div className=" m-2 flex flex-grow items-start justify-center overflow-x-auto">
           {isShowFlowchart &&
           pseudo &&
           checkPseudocodeSyntax(pseudo) === 'Cú pháp hợp lệ.' ? (

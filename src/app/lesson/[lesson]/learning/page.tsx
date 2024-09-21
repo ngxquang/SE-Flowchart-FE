@@ -2,12 +2,10 @@
 
 import Image from 'next/image';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
-import { Preview } from '@/components';
-import { useContext, useEffect, useState } from 'react';
+import { PreviewAssignment, PreviewFlowchart } from '@/components';
+import { useContext, useEffect } from 'react';
 import { useGetLessons } from '@/hooks';
 import { LessonContext } from '@/contexts';
-import PreviewAssignment from '@/components/Preview/PreviewAssignment';
-import PreviewFlowchart from '@/components/Preview/PreviewFlowchart';
 
 const LearningScreen = () => {
   const { setMarkdown, setPseudo } = useContext(LessonContext);

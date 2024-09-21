@@ -25,7 +25,6 @@ export const checkPseudocodeSyntax = (code: string) => {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
-    console.log(i, pseudocodeRules.END.test(line));
     if (pseudocodeRules.BEGIN.test(line)) {
       stack.push('BEGIN');
     } else if (pseudocodeRules.END.test(line)) {

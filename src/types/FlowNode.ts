@@ -1,16 +1,18 @@
 import { NodeType } from '@/enums';
 
-const delayTime: number = 1000;
+const delayTime: number = 0;
 
 export abstract class FlowNode {
   content: string;
   type: NodeType;
   id: string;
+  color: string;
 
   constructor(content: string, type: NodeType) {
     this.content = content;
     this.type = type;
     this.id = this.generateUniqueID();
+    this.color = '#f5f5f5';
   }
 
   private generateUniqueID(): string {

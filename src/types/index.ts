@@ -121,6 +121,20 @@ export type FlowchartProps = {
   pseudo: string;
 };
 
+export type FlowchartDynamicHandle = {
+  next: () => void;
+  prev: () => void;
+};
+
+export type FlowchartDynamicProps = {
+  pseudo: string;
+};
+
+export type ContentPair = {
+  left: string;
+  right: string;
+};
+
 export interface IFlowchartConfig {
   rectangleWidth: number;
   rectangleHeight: number;
