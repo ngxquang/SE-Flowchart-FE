@@ -19,7 +19,6 @@ export const checkPseudocodeSyntax = (code: string) => {
     .trim()
     .split('\n')
     .map((line) => line.trim());
-  console.log('🚀 ~ checkPseudocodeSyntax ~ lines:', lines);
   const stack = [];
 
   for (let i = 0; i < lines.length; i++) {

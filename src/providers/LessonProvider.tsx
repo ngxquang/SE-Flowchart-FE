@@ -2,10 +2,13 @@
 
 import { useState } from 'react';
 import { LessonContext } from '@/contexts';
+import { ContentPair } from '@/types';
 
 function LessonProvider({ children }: { children: React.ReactNode }) {
   const [markdown, setMarkdown] = useState<string>('');
   const [pseudo, setPseudo] = useState<string>('');
+  const [inputMode, setInputMode] = useState<boolean>(false);
+  const [contents, setContents] = useState<ContentPair[]>([]);
 
   return (
     <LessonContext.Provider
@@ -13,7 +16,11 @@ function LessonProvider({ children }: { children: React.ReactNode }) {
         markdown,
         setMarkdown,
         pseudo,
-        setPseudo
+        setPseudo,
+        inputMode,
+        setInputMode,
+        contents,
+        setContents
       }}
     >
       {children}
