@@ -5,6 +5,7 @@ import { checkPseudocodeSyntax } from './checkPseudocodeSyntax';
 import { generateSteps } from './generateSteps';
 import { setNodeColor } from './setNodeColor';
 import { generateContents } from './generateContents';
+import { parseInput } from './parseInput';
 
 export {
   heightNode,
@@ -13,5 +14,6 @@ export {
   checkPseudocodeSyntax,
   generateSteps,
   setNodeColor,
-  generateContents
+  generateContents,
+  parseInput
 };

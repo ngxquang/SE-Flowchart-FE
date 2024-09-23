@@ -1,3 +1,4 @@
+import { NodeType } from '@/enums';
 import {
   ConditionNode,
   ContentPair,
@@ -23,7 +24,8 @@ export async function generateContents(
       node.execute(variables, inputs);
       const content: ContentPair = {
         left: node.content,
-        right: JSON.stringify(inputs)
+        right: JSON.stringify(inputs),
+        type: NodeType.Parallelogram
       };
       contents.push(content);
     } else if (node instanceof WhileNode) {
@@ -36,7 +38,8 @@ export async function generateContents(
       ) {
         const content: ContentPair = {
           left: node.content,
-          right: 'Đúng'
+          right: 'Đúng',
+          type: NodeType.Diamond
         };
         contents.push(content);
         for (const bodyNode of node.body) {
@@ -45,7 +48,8 @@ export async function generateContents(
       }
       const content: ContentPair = {
         left: node.content,
-        right: 'Sai'
+        right: 'Sai',
+        type: NodeType.Diamond
       };
       contents.push(content);
     } else if (node instanceof ConditionNode) {
@@ -57,7 +61,8 @@ export async function generateContents(
 
       const content: ContentPair = {
         left: node.content,
-        right: conditionResult ? 'Đúng' : 'Sai'
+        right: conditionResult ? 'Đúng' : 'Sai',
+        type: NodeType.Diamond
       };
       contents.push(content);
 
@@ -70,7 +75,8 @@ export async function generateContents(
     } else if (node instanceof StartNode || node instanceof EndNode) {
       const content: ContentPair = {
         left: node.content,
-        right: ''
+        right: '',
+        type: NodeType.Oval
       };
       contents.push(content);
     } else if (node instanceof ProcessNode) {
@@ -82,7 +88,8 @@ export async function generateContents(
       variables[node.variable] = value;
       const content: ContentPair = {
         left: node.variable,
-        right: value
+        right: value,
+        type: NodeType.Rectangle
       };
       contents.push(content);
     } else if (node instanceof OutputNode) {
@@ -91,7 +98,8 @@ export async function generateContents(
       );
       const content: ContentPair = {
         left: node.content,
-        right: outputValues.join(', ')
+        right: outputValues.join(', '),
+        type: NodeType.Parallelogram
       };
       contents.push(content);
     } else {

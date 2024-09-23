@@ -14,6 +14,7 @@ import {
 import { FlowchartConfigurer } from './FlowchartConfigurer';
 import { FlowchartPositions } from './FlowchartPositions';
 import { Flowchart } from './Flowchart';
+import { NodeType } from '@/enums';
 
 export type InputProps = {
   title: string;
@@ -133,6 +134,7 @@ export type FlowchartDynamicProps = {
 export type ContentPair = {
   left: string;
   right: string;
+  type: NodeType;
 };
 
 export interface IFlowchartConfig {
