@@ -135,7 +135,8 @@ const Preview = () => {
         <ButtonSolid
           content="Chạy từng bước"
           isPrimary={true}
-          iconRight={<ArrowRightIcon width={20} height={20} color="white" />}
+          iconRight={<ArrowRightIcon width={20} height={20} color="white" 
+          onClick={handleStoreAssignment}/>}
         />
       </footer>
     </div>

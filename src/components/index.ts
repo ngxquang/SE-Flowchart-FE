@@ -18,6 +18,7 @@ import Search from './Search';
 import Modal_taoBT from './Modal';
 import ListGV from '@/components/ListGV';
 import ChapterCard from './ChapterCard';
+import EBQuest from './EditorBlock/EBQuest';
 
 export { classNames };
 export { ButtonBase, ButtonSolid, ButtonOutline };
@@ -31,3 +32,4 @@ export { Search };
 export { Modal_taoBT };
 export { ListGV };
 export { ChapterCard };
+export { EBQuest };
