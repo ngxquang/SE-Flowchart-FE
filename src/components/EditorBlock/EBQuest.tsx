@@ -5,20 +5,23 @@ import { LessonContext } from '@/contexts';
 import { ContentPair } from '@/types';
 import { NodeType } from '@/enums';
 import ButtonSolid from '../Button/ButtonSolid';
+import { convertContentPairToRecord } from '@/helpers';
 
 type LessonContextType = {
   inputMode: boolean;
   setInputMode: (value: boolean) => void;
   contents: ContentPair[];
+  setInputs: (value: Record<string, number>) => void;
   // setContents: (value: ContentPair[]) => void;
 };
 
 const EBQuest = () => {
   const [inputValues, setInputValues] = useState<string[]>([]);
   const [inputStatus, setInputStatus] = useState<string>('');
-  const { inputMode, setInputMode, contents } = useContext(
+  const { inputMode, setInputMode, contents, setInputs } = useContext(
     LessonContext
   ) as LessonContextType;
+  console.log('🚀 ~ EBQuest ~ contents:', contents);
 
   const handleInputChange = (index: number, value: string) => {
     const newInputValues = [...inputValues];
@@ -56,7 +59,8 @@ const EBQuest = () => {
       inputs.forEach((input, index) => {
         input.right = testInput[index];
       });
-      console.log('🚀 ~ inputs.forEach ~ inputs:', inputs);
+      setInputMode(false);
+      setInputs(convertContentPairToRecord(inputs));
     } else {
       setInputStatus('Some inputs are missing values');
     }
@@ -78,14 +82,54 @@ const EBQuest = () => {
         </>
       );
     } else if (content.type === NodeType.Parallelogram) {
+      if (content.right)
+        return (
+          <>
+            <React.Fragment>
+              <span>{content.left}: </span>
+              <InputAssignment
+                key={index}
+                value={content.right}
+                title="test"
+                readOnly={!inputMode}
+                onChange={(value) => handleInputChange(index, value)}
+              />
+            </React.Fragment>
+          </>
+        );
+      return (
+        <>
+          <React.Fragment>
+            <span>{content.left}: </span>
+            <InputAssignment
+              key={index}
+              type="number"
+              title="test"
+              readOnly={!inputMode}
+              onChange={(value) => handleInputChange(index, value)}
+            />
+          </React.Fragment>
+        </>
+      );
+    } else if (content.type === NodeType.Rectangle) {
       return (
         <>
           <React.Fragment>
             <span>{content.left} = </span>
+            <span>{content.right}</span>
+          </React.Fragment>
+        </>
+      );
+    } else if (content.type === NodeType.Diamond) {
+      return (
+        <>
+          <React.Fragment>
+            <span>{content.left} </span>
             <InputAssignment
               key={index}
+              value={content.right}
               title="test"
-              type="number"
+              readOnly={true}
               onChange={(value) => handleInputChange(index, value)}
             />
           </React.Fragment>
@@ -142,7 +186,7 @@ const EBQuest = () => {
       </div>
       {/* Content Display */}
       <div className="flex h-full w-full flex-grow overflow-hidden overflow-y-auto p-4">
-        <pre className="w-full whitespace-pre-wrap break-words">
+        <pre className="w-full overscroll-y-auto whitespace-pre-wrap break-words">
           {/* Render từng step */}
           {contents.map((content: ContentPair, index) => (
             <div

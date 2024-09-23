@@ -25,7 +25,7 @@ function InputAssignment({
       : 'border-outline';
 
   return (
-    <div className="relative my-1 w-1/6 min-w-12">
+    <div className="relative my-1 w-1/3 min-w-12">
       <input
         className={classNames(
           'w-full rounded border bg-surface px-1 focus:border-outline-focus focus:outline focus:outline-4 focus:outline-primary-container',

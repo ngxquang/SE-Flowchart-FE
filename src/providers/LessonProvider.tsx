@@ -9,6 +9,7 @@ function LessonProvider({ children }: { children: React.ReactNode }) {
   const [pseudo, setPseudo] = useState<string>('');
   const [inputMode, setInputMode] = useState<boolean>(false);
   const [contents, setContents] = useState<ContentPair[]>([]);
+  const [inputs, setInputs] = useState<Record<string, number>>({});
 
   return (
     <LessonContext.Provider
@@ -20,7 +21,9 @@ function LessonProvider({ children }: { children: React.ReactNode }) {
         inputMode,
         setInputMode,
         contents,
-        setContents
+        setContents,
+        inputs,
+        setInputs
       }}
     >
       {children}

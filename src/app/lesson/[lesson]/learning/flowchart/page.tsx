@@ -12,12 +12,11 @@ import {
 import { useContext, useEffect, useState } from 'react';
 import { useGetLessons } from '@/hooks';
 import { LessonContext } from '@/contexts';
+import EBQuest from '@/components/EditorBlock/EBQuest';
 
 function RunFlowChartScreen() {
   const [isShowAssignment, setIsShowAssignment] = useState(false);
   const [isShowPseudo, setIsShowPseudo] = useState(false);
-
-  const { setMarkdown, setPseudo } = useContext(LessonContext);
 
   useEffect(() => {
     setIsShowAssignment(true);
@@ -85,7 +84,7 @@ function RunFlowChartScreen() {
                   <PanelResizeHandle className="h-2 bg-on-primary" />
                   {/* Bottom-left panel */}
                   <Panel defaultSize={50} className="">
-                    <PreviewAssignment />
+                    <EBQuest />
                   </Panel>
                 </PanelGroup>
               ) : (

@@ -2,13 +2,14 @@ import { NodeType } from '@/enums';
 import { ContentPair } from '@/types';
 
 export const parseInput = (input: ContentPair): ContentPair[] => {
-  const parsedValues = JSON.parse(input.right); // Parse the JSON string
+  const variables = input.left
+    .replace('Nhập', '')
+    .split(',')
+    .map((v) => v.trim());
 
-  return Object.keys(parsedValues).map((key) => {
-    return {
-      left: key,
-      right: '',
-      type: NodeType.Parallelogram
-    };
-  });
+  return variables.map((variable) => ({
+    left: variable,
+    right: '', // Initialize the 'right' value as empty
+    type: NodeType.Parallelogram
+  }));
 };

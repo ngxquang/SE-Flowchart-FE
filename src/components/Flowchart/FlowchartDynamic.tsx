@@ -9,6 +9,7 @@ import React, {
 import {
   generateContents,
   generateSteps,
+  parseInput,
   parsePseudoCode,
   setNodeColor
 } from '@/helpers';
@@ -30,6 +31,8 @@ type LessonContextType = {
   setInputMode: (value: boolean) => void;
   contents: ContentPair[];
   setContents: (value: ContentPair[]) => void;
+  inputs: Record<string, number>;
+  setInputs: (value: Record<string, number>) => void;
 };
 
 const FlowchartDynamic = forwardRef<
@@ -44,9 +47,8 @@ const FlowchartDynamic = forwardRef<
   const [currContents, setCurrContents] = useState<ContentPair[]>([]);
 
   const prevStepRef = useRef<number>(step);
-  const { inputMode, setInputMode, contents, setContents } = useContext(
-    LessonContext
-  ) as LessonContextType;
+  const { inputMode, setInputMode, contents, setContents, inputs, setInputs } =
+    useContext(LessonContext) as LessonContextType;
 
   const configurer = new FlowchartConfigurer();
   configurer.setRectangleSizes(150, 45);
@@ -84,10 +86,7 @@ const FlowchartDynamic = forwardRef<
   }, [pseudo]);
 
   useEffect(() => {
-    console.log('currStep: ', step);
-
     const prevStep = prevStepRef.current;
-    console.log('🚀 prevStep:', prevStep);
 
     if (inputMode === true) {
       if (step > prevStep) {
@@ -95,6 +94,19 @@ const FlowchartDynamic = forwardRef<
         return;
       } else if (step < prevStep) {
         setInputMode(false);
+        let newContents = [...contents];
+        const content = parseInput(currContents[step + 1]);
+        newContents = newContents.filter(
+          (ct) => !content.some((c) => c.left === ct.left)
+        );
+        setContents(newContents);
+
+        const currFlowchart = [...flowchart];
+        const newFlowchart = setNodeColor(currFlowchart, steps[step], '#fafa');
+        drawer?.generateShapes(newFlowchart);
+
+        prevStepRef.current = step;
+        return;
       }
     }
 
@@ -103,6 +115,7 @@ const FlowchartDynamic = forwardRef<
     if (step >= steps.length || step < -1) {
       setStep(-1);
       setContents([]);
+      setInputs({});
       return;
     }
 
@@ -110,26 +123,54 @@ const FlowchartDynamic = forwardRef<
 
     if (currNode instanceof InputNode) {
       setInputMode(true); // Activate input mode
+      if (step > prevStep) {
+        const newContents = [...contents];
+        const content = parseInput(currContents[step]);
+        newContents.push(...content);
+        setContents(newContents);
+      } else if (step < prevStep) {
+        const newContents = [...contents];
+        newContents.pop();
+        setContents(newContents);
+      }
+      console.log('🚀 ~ useEffect ~ contents:', contents);
+      const currFlowchart = [...flowchart];
+      const newFlowchart = setNodeColor(currFlowchart, steps[step], '#fafa');
+      drawer?.generateShapes(newFlowchart);
+
+      prevStepRef.current = step;
+      return;
     }
 
     if (step > prevStep) {
-      const newContents = contents;
+      const newContents = [...contents];
       const content = currContents[step];
       newContents.push(content);
       setContents(newContents);
     } else if (step < prevStep) {
-      const newContents = contents;
+      const newContents = [...contents];
+      console.log('🚀 ~ useEffect ~ ddnewContents:', newContents);
       newContents.pop();
       setContents(newContents);
     }
     console.log('🚀 ~ useEffect ~ contents:', contents);
 
-    const currFlowchart = flowchart;
+    const currFlowchart = [...flowchart];
     const newFlowchart = setNodeColor(currFlowchart, steps[step], '#fafa');
     drawer?.generateShapes(newFlowchart);
 
     prevStepRef.current = step;
   }, [step, currContents]);
+
+  useEffect(() => {
+    if (inputs) {
+      generateSteps(flowchart, inputs).then((steps) => setSteps(steps));
+      generateContents(flowchart, inputs).then((contents) => {
+        setCurrContents(contents);
+        console.log('🚀 ~ useEffect ~ contents:', contents);
+      });
+    }
+  }, [inputs]);
 
   useImperativeHandle(
     ref,

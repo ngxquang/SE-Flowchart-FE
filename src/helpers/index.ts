@@ -6,6 +6,7 @@ import { generateSteps } from './generateSteps';
 import { setNodeColor } from './setNodeColor';
 import { generateContents } from './generateContents';
 import { parseInput } from './parseInput';
+import { convertContentPairToRecord } from './convertContentPairToRecord';
 
 export {
   heightNode,
@@ -15,5 +16,6 @@ export {
   generateSteps,
   setNodeColor,
   generateContents,
-  parseInput
+  parseInput,
+  convertContentPairToRecord
 };
