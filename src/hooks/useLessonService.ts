@@ -1,5 +1,11 @@
 import useSWR, { mutate } from 'swr';
-import { getLesson, getLessons, addLesson } from '@/services/lessonService';
+import {
+  getLesson,
+  getLessons,
+  addLesson,
+  getLessonsByLessonTypeId,
+  getLessonByLessonTypeIdAndLessonName
+} from '@/services/lessonService';
 
 const fetcherGetLesson = (id: number) => getLesson(id);
 
@@ -10,10 +16,35 @@ export const useGetLesson = (id: number) => {
   return { data, error, isLoading };
 };
 
+const fetcherGetLessonByLessonTypeIdAndLessonName = (
+  lessonTypeId: number,
+  lessonName: string
+) => getLessonByLessonTypeIdAndLessonName(lessonTypeId, lessonName);
+
+export const useGetLessonByLessonTypeIdAndLessonName = (
+  lessonTypeId: number,
+  lessonName: string
+) => {
+  const { data, error, isLoading } = useSWR(`/lessons/lesson-name`, () =>
+    fetcherGetLessonByLessonTypeIdAndLessonName(lessonTypeId, lessonName)
+  );
+  return { data, error, isLoading };
+};
+
 const fetcherGetLessons = () => getLessons();
 
 export const useGetLessons = () => {
   const { data, error, isLoading } = useSWR(`/lessons`, fetcherGetLessons);
+  return { data, error, isLoading };
+};
+
+const fetcherGetLessonsBylessonTypeId = (lessonTypeId: number) =>
+  getLessonsByLessonTypeId(lessonTypeId);
+
+export const useGetLessonsByLessonTypeId = (lessonTypeId: number) => {
+  const { data, error, isLoading } = useSWR(`/lessons`, () =>
+    fetcherGetLessonsBylessonTypeId(lessonTypeId)
+  );
   return { data, error, isLoading };
 };
 

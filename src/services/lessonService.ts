@@ -20,6 +20,30 @@ export const getLesson = async (id: number) => {
   }
 };
 
+export const getLessonByLessonTypeIdAndLessonName = async (lessonTypeId: number, lessonName: string) => {
+  try {
+    const res = await axios.get(`/lessons/lesson-name`, {
+      params: {lessonTypeId, lessonName}
+    })
+    return res.data;
+  } catch (error) {
+    console.log('🚫 ~ getLessonByLessonTypeIdAndLessonName ~ error:', error);
+    throw error;
+  }
+}
+
+export const getLessonsByLessonTypeId = async (lessonTypeId: number) => {
+  try {
+    const res = await axios.get(`/lessons`, {
+      params: {lessonTypeId}
+    })
+    return res.data;
+  } catch (error) {
+    console.log('🚫 ~ getLessonByLessonTypeId ~ error:', error);
+    throw error;
+  }
+}
+
 export const addLesson = async ({
   description,
   lessonGroupId,
