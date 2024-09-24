@@ -23,6 +23,7 @@ const EBQuest = () => {
   ) as LessonContextType;
   console.log('🚀 ~ EBQuest ~ contents:', contents);
 
+  // xử lý ghi nhận nhiều input
   const handleInputChange = (index: number, value: string) => {
     const newInputValues = [...inputValues];
     newInputValues[index] = value; // Cập nhật giá trị tại index
@@ -38,6 +39,7 @@ const EBQuest = () => {
     // setValidStates(newValidStates);
   };
 
+  // Kiểm tra các input đã được nhập hết chưa -> nếu rồi thì trả dữ liệu cho FlowchartDynamic
   const handleSubmit = () => {
     if (inputMode === false) {
       setInputStatus('No input required');
@@ -141,22 +143,6 @@ const EBQuest = () => {
   // useEffect(() => {
   //   setCurrContents(contents);
   // }, [contents]);
-
-  // const renderStepWithInput = (content: ContentPair) => {
-  //   const parts = content.split('||'); // Tách dựa trên "||"
-  //   return (
-  //     <>
-  //       {parts.map((part, index) => (
-  //         <React.Fragment key={index}>
-  //           {part}
-  //           {index < parts.length - 1 && (
-  //             <InputAssignment title="test" onChange={() => {}} />
-  //           )}
-  //         </React.Fragment>
-  //       ))}
-  //     </>
-  //   );
-  // };
 
   return (
     <div className="relative flex h-full w-full flex-col overflow-hidden rounded-xl border border-outline">
