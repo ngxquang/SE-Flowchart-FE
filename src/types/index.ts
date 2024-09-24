@@ -82,3 +82,16 @@ export type MarkdownEditorHandle = {
   addFormatting: (text: string) => void;
   addText: (text: string) => void;
 };
+
+export type InputListGVProps = {
+  id: number[],
+  lessonName: string[];
+  description: string[];
+  lessonGroupName: string[];
+  lengthData: number;
+  chapter: number,
+}
+
+export type SearchProps = {
+  onSearch: (searchTerm: string) => void;
+}
