@@ -4,20 +4,25 @@ import Image from 'next/image';
 import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import { EBAssignment, EBPseudo, Preview } from '@/components';
 import { useContext, useEffect, useState } from 'react';
-import { useGetLessons } from '@/hooks';
+import { useGetLesson, useGetLessons } from '@/hooks';
 import { LessonContext } from '@/contexts';
+import { useParams } from 'next/navigation';
 
 export default function LessonDetail() {
+  const params = useParams();
+  const { lesson } = params;
+  const lessonIdParam = Number(lesson)
+  
   const [isShowAssignment, setIsShowAssignment] = useState(false);
   const [isShowPseudo, setIsShowPseudo] = useState(false);
 
   const { markdown, setMarkdown } = useContext(LessonContext);
-  const { data, error, isLoading } = useGetLessons();
-
+  const { data, error, isLoading } = useGetLesson(lessonIdParam);
+  
   useEffect(() => {
     if (isLoading) setMarkdown('...loading...');
     if (data) {
-      const initData = data.data[0].description;
+      const initData = data.data.description;
       setMarkdown(initData);
     }
   }, [data]);
