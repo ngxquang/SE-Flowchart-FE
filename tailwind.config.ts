@@ -15,6 +15,7 @@ const config: Config = {
       },
       fontFamily: {
         lato: ["var(--font-lato)"],
+        roboto_slab: ["var(--font-roboto-slab)"]
       },
     },
     colors: {
@@ -33,6 +34,10 @@ const config: Config = {
       'erorr': '#D32F2F',
       'surface': '#FFFFFF',
       'surface-variant': '#FFD2C1',
+      'on-surface': '#49454F',
+      'error': '#D32F2F',
+      'success': '#388E3C',
+
       'high': '#21005D'
     },
   },

@@ -1,3 +1,6 @@
-import AppContext from './AppContext';
+'use client'
 
-export { AppContext };
+import AppContext from './AppContext';
+import LessonContext from './LessonContext';
+
+export { AppContext, LessonContext };
