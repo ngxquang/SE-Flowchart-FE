@@ -1,10 +1,16 @@
 'use client'
 
+import { SearchProps } from '@/types';
 import React, { useState } from 'react'
 
-function Search() {
+function Search({onSearch}: SearchProps) {
     const [searchTerm, setSearchTerm] = useState('');
 
+    const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const term = e.target.value;
+        setSearchTerm(term);
+        onSearch(term);
+    }
     return (
         <div className="relative w-[640px] 2xl:w-[720px] mx-auto">
             <input
@@ -13,7 +19,7 @@ function Search() {
                 className="focus:outline-none block text-[22px] text-on-surface border border-outline-var rounded-[28px] w-full 2xl:h-[74px] h-[64px] placeholder-on-surface placeholder-[22px] pl-5 pr-12"
                 placeholder="Tìm kiếm..."
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={handleSearch}
             />
             <div className="absolute inset-y-0 right-0 flex items-center pr-5 pointer-events-none">
                 <svg className="w-[20px] text-gray-500 h-[20px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
