@@ -1,5 +1,20 @@
 import { classNames } from './../components/classNames';
 import { ReactNode } from 'react';
+import {
+  FlowNode,
+  StartNode,
+  EndNode,
+  InputNode,
+  OutputNode,
+  ProcessNode,
+  WhileNode,
+  ConditionNode,
+  TempNode
+} from './FlowNode';
+import { FlowchartConfigurer } from './FlowchartConfigurer';
+import { FlowchartPositions } from './FlowchartPositions';
+import { Flowchart } from './Flowchart';
+import { NodeType } from '@/enums';
 
 export type InputProps = {
   title: string;
@@ -62,7 +77,7 @@ export type PaginationProps = {
   limit: number;
   siblings: number;
   onPageChange: (page: number | string) => void;
-}
+};
 
 export type ChapterCardType = {
   id: number | string;
@@ -82,6 +97,76 @@ export type MarkdownEditorHandle = {
   addFormatting: (text: string) => void;
   addText: (text: string) => void;
 };
+
+export type PseudoEditorProps = {
+  value: string;
+  onChange: (value: string) => void;
+};
+
+export type PseudoEditorHandle = {
+  focus: () => void;
+  clearContent: () => void;
+  addText: (text: string) => void;
+};
+
+export type ProfileType = {
+  name: string;
+  email: string;
+  username: string;
+  sex: string;
+  phone: string;
+  address: string;
+};
+
+export type FlowchartProps = {
+  pseudo: string;
+};
+
+export type FlowchartDynamicHandle = {
+  next: () => void;
+  prev: () => void;
+};
+
+export type FlowchartDynamicProps = {
+  pseudo: string;
+};
+
+export type ContentPair = {
+  left: string;
+  right: string;
+  type: NodeType;
+};
+
+export interface IFlowchartConfig {
+  rectangleWidth: number;
+  rectangleHeight: number;
+  arrowWidth: number;
+  arrowHeight: number;
+  lineWidth: number;
+  lineHeight: number;
+  circleRadius: number;
+  fontFamily: string;
+  fontColor: string;
+}
+
+export interface IFlowchartPosition {
+  id: string;
+  title: string;
+}
+
+export {
+  FlowNode,
+  StartNode,
+  EndNode,
+  InputNode,
+  OutputNode,
+  ProcessNode,
+  WhileNode,
+  ConditionNode,
+  TempNode
+};
+
+export { FlowchartConfigurer, FlowchartPositions, Flowchart };
 
 export type HomeScreenItemsProps = {
   title: string;

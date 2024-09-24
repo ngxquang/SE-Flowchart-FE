@@ -1,5 +1,6 @@
 import useSWR, { mutate } from 'swr';
 import { getLesson, getLessons, addLesson } from '@/services/lessonService';
+import { CreateLessonDto } from '@/dto/create-lesson';
 
 const fetcherGetLesson = (id: number) => getLesson(id);
 
@@ -18,11 +19,7 @@ export const useGetLessons = () => {
 };
 
 export const useAddLesson = () => {
-  const addNewLesson = async (lessonData: {
-    description: string;
-    lessonGroupId: number;
-    lessonTypeId: number;
-  }) => {
+  const addNewLesson = async (lessonData: CreateLessonDto) => {
     try {
       await addLesson(lessonData);
       // Trigger revalidation of the lesson data

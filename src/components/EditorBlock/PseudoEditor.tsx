@@ -1,70 +1,67 @@
 import React, {
-  useEffect,
-  useRef,
   forwardRef,
-  useImperativeHandle
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState
 } from 'react';
-import { EditorSelection, EditorState } from '@codemirror/state';
 import { EditorView, keymap } from '@codemirror/view';
-import { markdown } from '@codemirror/lang-markdown';
+import { EditorSelection, EditorState } from '@codemirror/state';
 import { basicSetup } from 'codemirror';
-import { MarkdownEditorHandle, MarkdownEditorProps } from '@/types';
+import {
+  acceptCompletion,
+  autocompletion,
+  completeFromList
+} from '@codemirror/autocomplete';
+import { PseudoEditorHandle, PseudoEditorProps } from '@/types';
 
-// const myTheme = EditorView.theme({
-//   '&': {
-//     // color: '#f8f8f2'
-//     backgroundColor: '#CAC4D0' // Tùy chỉnh background cho toàn bộ editor
-//   },
-//   '.cm-content': {
-//     // fontFamily: 'monospace', // Thay đổi font
-//     // caretColor: '#ff79c6' // Thay đổi màu con trỏ
-//   },
-//   '.cm-gutters': {
-//     backgroundColor: '#CAC4D0',
-//     color: '#f8f8f2',
-//     border: '#CAC4D0' // Xóa đường viền của gutter
-//   }
-// });
-
-const MarkdownEditor = forwardRef<MarkdownEditorHandle, MarkdownEditorProps>(
+const PseudoEditor = forwardRef<PseudoEditorHandle, PseudoEditorProps>(
   ({ value, onChange }, ref) => {
     const editorRef = useRef<HTMLDivElement>(null);
     const editorViewRef = useRef<EditorView | null>(null);
 
+    const handleFocus = () => {
+      console.log('🚀 ~ handleFocus ~ editorRef.current:', editorRef.current);
+      if (editorRef.current) {
+        editorRef.current.focus();
+      }
+    };
+
     useEffect(() => {
       if (editorRef.current && !editorViewRef.current) {
+        // Danh sách từ khóa cho gợi ý code
+        const keywords = [
+          { label: 'BEGIN', type: 'keyword' },
+          { label: 'END', type: 'keyword' },
+          { label: 'IF', type: 'keyword' },
+          { label: 'ELSE', type: 'keyword' },
+          { label: 'ENDIF', type: 'keyword' },
+          { label: 'WHILE', type: 'keyword' },
+          { label: 'DO', type: 'keyword' },
+          { label: 'ENDWHILE', type: 'keyword' },
+          { label: 'INPUT', type: 'function' },
+          { label: 'OUTPUT', type: 'function' }
+          // Thêm các từ khóa khác nếu cần
+        ];
+
         const state = EditorState.create({
           doc: value,
           extensions: [
             basicSetup,
-            markdown(),
+            autocompletion({
+              override: [completeFromList(keywords)]
+            }),
             keymap.of([
               {
-                key: 'Mod-b', // 'Mod' represents 'Ctrl' on Windows/Linux and 'Cmd' on Mac
-                run: () => {
-                  handleAddFormatting('**');
-                  return true;
-                }
-              },
-              {
-                key: 'Mod-t',
-                run: () => {
-                  handleAddFormatting('*');
-                  return true;
-                }
-              },
-              {
-                key: 'Alt-=',
-                run: () => {
-                  handleAddFormatting('$');
-                  return true;
-                }
-              },
-              {
                 key: 'Tab',
-                run: () => {
+                run: (view) => {
+                  const completionAccepted = acceptCompletion(view);
+                  if (completionAccepted) {
+                    return true; // Nếu có gợi ý được chấp nhận, trả về true
+                  }
                   handleAddText('    ');
-                  return true;
+                  view.focus();
+                  return false;
                 }
               }
             ]),
@@ -76,6 +73,7 @@ const MarkdownEditor = forwardRef<MarkdownEditorHandle, MarkdownEditorProps>(
                 onChange(newValue);
               }
             })
+            // Thêm các phím tắt cho tab và format nếu cần
           ]
         });
 
@@ -108,16 +106,11 @@ const MarkdownEditor = forwardRef<MarkdownEditorHandle, MarkdownEditorProps>(
                 from: 0,
                 to: state.doc.length,
                 insert: ''
-              },
-              selection: { anchor: state.selection.main.from }, // Move cursor to the end of the inserted spaces
-              scrollIntoView: true // Ensure that the cursor stays in view after the change
+              }
             });
 
             editorViewRef.current.dispatch(transaction);
           }
-        },
-        addFormatting(text: string) {
-          handleAddFormatting(text);
         },
         addText(text: string) {
           handleAddText(text);
@@ -150,29 +143,9 @@ const MarkdownEditor = forwardRef<MarkdownEditorHandle, MarkdownEditorProps>(
         setTimeout(() => editorViewRef.current?.focus(), 10);
       }
     };
-
-    const handleAddFormatting = (format: string) => {
-      if (editorViewRef.current) {
-        const { state } = editorViewRef.current;
-        const { from, to } = state.selection.main;
-
-        const selectedText = state.doc.sliceString(from, to);
-        const newText = format + selectedText + format;
-
-        const transaction = state.update({
-          changes: { from, to, insert: newText },
-          selection: EditorSelection.single(
-            from + format.length,
-            to + format.length
-          )
-        });
-
-        editorViewRef.current.dispatch(transaction);
-      }
-    };
-
-    return <div ref={editorRef} className="h-full w-full"></div>;
+    
+    return <div ref={editorRef} className="h-full w-full" />;
   }
 );
 
-export default MarkdownEditor;
+export default PseudoEditor;

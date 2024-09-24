@@ -29,15 +29,6 @@ export default function LessonDetail() {
     }
   }, [data]);
 
-  // useEffect(() => {
-  //   if (markdown) {
-  //     let newMark = markdown;
-  //     if (typeof newMark === 'string') {
-  //       newMark = newMark.replace(/\\/g, '\\\\');
-  //     }
-  //   }
-  // }, [markdown]);
-
   const handleCollapseOrExpandDe = () => {
     setIsShowAssignment(!isShowAssignment);
   };
