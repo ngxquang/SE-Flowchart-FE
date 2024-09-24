@@ -13,18 +13,7 @@ import {
   autocompletion,
   completeFromList
 } from '@codemirror/autocomplete';
-import { indentWithTab } from '@codemirror/commands';
-
-interface PseudoEditorProps {
-  value: string;
-  onChange: (value: string) => void;
-}
-
-interface PseudoEditorHandle {
-  focus: () => void;
-  clearContent: () => void;
-  addText: (text: string) => void;
-}
+import { PseudoEditorHandle, PseudoEditorProps } from '@/types';
 
 const PseudoEditor = forwardRef<PseudoEditorHandle, PseudoEditorProps>(
   ({ value, onChange }, ref) => {

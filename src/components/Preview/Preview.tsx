@@ -11,6 +11,7 @@ import { CreateLessonDto } from '@/dto/create-lesson';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
 import FlowchartStatic from '../Flowchart/FlowchartStatic';
 import { checkPseudocodeSyntax } from '@/helpers';
+import ButtonSolid from '../Button/ButtonSolid';
 
 const Preview = () => {
   const { markdown, pseudo } = useContext(LessonContext);
@@ -115,27 +116,27 @@ const Preview = () => {
         >
           {markdown}
         </Markdown>
-        <div className="flex h-full w-full items-start justify-center">
-          {pseudo && checkPseudocodeSyntax(pseudo) === 'Cú pháp hợp lệ.' ? (
-            <FlowchartStatic pseudo={pseudo} />
-          ) : (
-            pseudo && (
-              <div className="font-roboto_slab">
-                {checkPseudocodeSyntax(pseudo)}
-              </div>
-            )
-          )}
+        <div className="max-h-fit w-full">
+          <div className="flex items-start justify-center">
+            {pseudo && checkPseudocodeSyntax(pseudo) === 'Cú pháp hợp lệ.' ? (
+              <FlowchartStatic pseudo={pseudo} />
+            ) : (
+              pseudo && (
+                <span className="font-roboto_slab text-erorr">
+                  Please check your code!
+                </span>
+              )
+            )}
+          </div>
         </div>
       </div>
       {/* Footer */}
       <footer className="flex w-full flex-row-reverse bg-primary-container px-5 py-3">
-        <div
-          className="flex flex-row rounded-full bg-secondary px-4 py-2 text-on-secondary shadow-lg hover:cursor-pointer"
-          onClick={handleStoreAssignment}
-        >
-          <span className="mr-3 font-medium">Chạy từng bước</span>
-          <ArrowRightIcon width={20} height={20} color="white" />
-        </div>
+        <ButtonSolid
+          content="Chạy từng bước"
+          isPrimary={true}
+          iconRight={<ArrowRightIcon width={20} height={20} color="white" />}
+        />
       </footer>
     </div>
   );

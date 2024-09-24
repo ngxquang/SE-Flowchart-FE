@@ -933,29 +933,31 @@ export class Flowchart {
   generateShapes(flowchart: FlowNode[]) {
     flowchart.forEach((node: FlowNode) => {
       const id = node.id;
+      const color = node.color;
+
       switch (node.type) {
         case NodeType.Oval:
-          this.oval(id, '#f5f5f5');
+          this.oval(id, color);
           break;
         case NodeType.Parallelogram:
-          this.parallelogram(id, '#f5f5f5');
+          this.parallelogram(id, color);
           break;
         case NodeType.Rectangle:
-          this.rectangle(id, '#f5f5f5');
+          this.rectangle(id, color);
           break;
         case NodeType.Diamond:
-          this.diamond(id, '#f5f5f5');
+          this.diamond(id, color);
           if (node instanceof ConditionNode) {
             this.generateShapes(node.trueBranch);
             this.generateShapes(node.falseBranch);
           }
           break;
         case NodeType.WhileLoop:
-          this.diamond(id, '#f5f5f5');
+          this.diamond(id, color);
           if (node instanceof WhileNode) this.generateShapes(node.body);
           break;
         case NodeType.Temp:
-          this.circle(id, '#f5f5f5');
+          this.circle(id, color);
           break;
         default:
           console.warn(`Unhandled node type: ${node.type}`);
@@ -1038,7 +1040,7 @@ export class Flowchart {
             );
             break;
           }
-          this.lineLeftLineLeftForIf(prevNode.id, id, 'black', 0.5, 0.5, 2.5);
+          this.lineLeftLineLeftForIf(prevNode.id, id, 'black', 0.5, 0.5, 4);
         }
         break;
       default:

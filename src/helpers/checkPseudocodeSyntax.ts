@@ -19,13 +19,11 @@ export const checkPseudocodeSyntax = (code: string) => {
     .trim()
     .split('\n')
     .map((line) => line.trim());
-  console.log('🚀 ~ checkPseudocodeSyntax ~ lines:', lines);
   const stack = [];
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
 
-    console.log(i, pseudocodeRules.END.test(line));
     if (pseudocodeRules.BEGIN.test(line)) {
       stack.push('BEGIN');
     } else if (pseudocodeRules.END.test(line)) {

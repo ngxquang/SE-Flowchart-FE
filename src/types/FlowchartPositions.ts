@@ -60,8 +60,8 @@ export class FlowchartPositions {
     flowchart: FlowNode[]
   ) {
     const label = node.content;
-    console.log('🚀 ~ FlowchartPositionsv2 ~ label:', label);
     const id = node.id;
+
     switch (node.type) {
       case NodeType.Oval:
       case NodeType.Rectangle:
