@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://1864b2aa-a87b-4cb1-b478-fc91d599c460.mock.pstmn.io', // Replace with your API base URL
+  baseURL: 'http://localhost:3001', // Replace with your API base URL
   headers: {
     'Content-Type': 'application/json',
-    'x-mock-response-name': '200 OK - List of Lessons'
+    // 'x-mock-response-name': '200 OK - List of Lessons'
   }
 });
 
