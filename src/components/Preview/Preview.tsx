@@ -21,6 +21,7 @@ const Preview = () => {
     if (!markdown) return;
 
     const data: CreateLessonDto = {
+      lessonName: 'Bài 001',
       description: markdown,
       image: '',
       status: '1',
@@ -30,7 +31,12 @@ const Preview = () => {
       lessonGroupId: 1,
       lessonTypeId: 1
     };
-    await addLesson(data);
+    try {
+      await addLesson(data);
+      window.alert('Lưu bài học thành công!');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -133,6 +139,7 @@ const Preview = () => {
       {/* Footer */}
       <footer className="flex w-full flex-row-reverse bg-primary-container px-5 py-3">
         <ButtonSolid
+          onClick={handleStoreAssignment}
           content="Chạy từng bước"
           isPrimary={true}
           iconRight={<ArrowRightIcon width={20} height={20} color="white" />}

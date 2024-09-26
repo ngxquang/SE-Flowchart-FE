@@ -2,7 +2,7 @@ import React, { useContext, useRef, useState } from 'react';
 import { LessonContext } from '@/contexts';
 import { checkPseudocodeSyntax } from '@/helpers';
 import ButtonSolid from '../Button/ButtonSolid';
-import { ArrowRightIcon, PlayIcon } from '@heroicons/react/20/solid';
+import { ArrowRightIcon, PlayIcon, PauseIcon } from '@heroicons/react/20/solid';
 import { useRouter, useParams } from 'next/navigation';
 import {
   ChevronLeftIcon,
@@ -19,6 +19,7 @@ const PreviewRunFlowchart = () => {
   const params = useParams();
 
   const [isShowFlowchart, setIsShowFlowchart] = useState(false);
+  const [isRunAuto, setIsRunAuto] = useState<boolean>(false);
 
   const { lesson } = params;
   const { pseudo } = useContext(LessonContext);
@@ -35,14 +36,56 @@ const PreviewRunFlowchart = () => {
     }
   };
 
+  const handleRunAuto = () => {
+    if (flowchartRef.current) {
+      if (isRunAuto === true) {
+        flowchartRef.current.stopRunAuto();
+        setIsRunAuto(false);
+      } else {
+        flowchartRef.current.startRunAuto();
+        setIsRunAuto(true);
+      }
+    }
+  };
+
+  const handleForward = () => {
+    if (flowchartRef.current) {
+      flowchartRef.current.forwardToEnd();
+      setIsRunAuto(true);
+    }
+  };
+
+  const handleBackward = () => {
+    if (flowchartRef.current) {
+      flowchartRef.current.backwardToStart();
+      setIsRunAuto(true);
+    }
+  };
+
   return (
     <div className="relative flex h-full w-full flex-col overflow-hidden rounded-xl">
       {/* Quick Access Toolbar */}
       <div className="flex select-none flex-row justify-around bg-primary-container px-2 py-2">
         <div className="flex flex-row gap-4">
-          <BackwardIcon className="size-8 rounded-full bg-primary p-2 text-on-primary hover:cursor-pointer hover:brightness-110" />
-          <PlayIcon className="size-8 rounded-full bg-primary p-2 text-on-primary hover:cursor-pointer hover:brightness-110" />
-          <ForwardIcon className="size-8 rounded-full bg-primary p-2 text-on-primary hover:cursor-pointer hover:brightness-110" />
+          <BackwardIcon
+            className="size-8 rounded-full bg-primary p-2 text-on-primary hover:cursor-pointer hover:brightness-110"
+            onClick={handleBackward}
+          />
+          {isRunAuto ? (
+            <PauseIcon
+              className="size-8 rounded-full bg-primary p-2 text-on-primary hover:cursor-pointer hover:brightness-110"
+              onClick={handleRunAuto}
+            />
+          ) : (
+            <PlayIcon
+              className="size-8 rounded-full bg-primary p-2 text-on-primary hover:cursor-pointer hover:brightness-110"
+              onClick={handleRunAuto}
+            />
+          )}
+          <ForwardIcon
+            className="size-8 rounded-full bg-primary p-2 text-on-primary hover:cursor-pointer hover:brightness-110"
+            onClick={handleForward}
+          />
         </div>
         <div className="flex flex-row gap-4">
           <ChevronLeftIcon
@@ -60,7 +103,12 @@ const PreviewRunFlowchart = () => {
       <div className="flex h-full w-full flex-grow overflow-hidden overflow-y-auto">
         <div className="m-2 flex flex-grow items-start justify-center overflow-x-auto">
           {pseudo && checkPseudocodeSyntax(pseudo) === 'Cú pháp hợp lệ.' ? (
-            <FlowchartDynamic ref={flowchartRef} pseudo={pseudo} />
+            <FlowchartDynamic
+              ref={flowchartRef}
+              pseudo={pseudo}
+              isRunAuto={isRunAuto}
+              setIsRunAuto={setIsRunAuto}
+            />
           ) : (
             pseudo && (
               <span className="font-roboto_slab text-erorr">

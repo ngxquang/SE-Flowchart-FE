@@ -127,6 +127,8 @@ export type FlowchartDynamicHandle = {
   prev: () => void;
   stopRunAuto: () => void;
   startRunAuto: () => void;
+  forwardToEnd: () => void;
+  backwardToStart: () => void;
 };
 
 export type FlowchartDynamicProps = {

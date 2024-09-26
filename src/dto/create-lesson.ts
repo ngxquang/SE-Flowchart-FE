@@ -1,4 +1,5 @@
 export type CreateLessonDto = {
+  lessonName: string;
   description: string;
   image: string;
   status: '0' | '1';

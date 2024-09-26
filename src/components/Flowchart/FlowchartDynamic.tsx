@@ -242,6 +242,22 @@ const FlowchartDynamic = forwardRef<
             setStep((prev) => prev + 1);
           }, 1000);
         }
+      },
+      backwardToStart() {
+        if (intervalStepRef.current === null) {
+          // Kiểm tra nếu chưa có interval nào đang chạy
+          intervalStepRef.current = setInterval(() => {
+            setStep((prev) => prev - 1);
+          }, 100);
+        }
+      },
+      forwardToEnd() {
+        if (intervalStepRef.current === null) {
+          // Kiểm tra nếu chưa có interval nào đang chạy
+          intervalStepRef.current = setInterval(() => {
+            setStep((prev) => prev + 1);
+          }, 0);
+        }
       }
     }),
     []
