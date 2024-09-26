@@ -93,15 +93,24 @@ export async function generateContents(
       };
       contents.push(content);
     } else if (node instanceof OutputNode) {
-      const outputValues = node.variables.map(
-        (variable) => `${variable} = ${variables[variable]?.toString()}`
-      );
-      const content: ContentPair = {
-        left: node.content,
-        right: outputValues.join(', '),
-        type: NodeType.Parallelogram
-      };
-      contents.push(content);
+      if (node.variables instanceof Array) {
+        const outputValues = node.variables.map(
+          (variable) => `${variable} = ${variables[variable]?.toString()}`
+        );
+        const content: ContentPair = {
+          left: node.content,
+          right: outputValues.join(', '),
+          type: NodeType.Parallelogram
+        };
+        contents.push(content);
+      } else if (typeof node.variables === 'string') {
+        const content: ContentPair = {
+          left: 'Xuất',
+          right: node.variables,
+          type: NodeType.Parallelogram
+        };
+        contents.push(content);
+      }
     } else {
       node.execute(variables);
     }

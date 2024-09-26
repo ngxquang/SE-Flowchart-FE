@@ -3,9 +3,10 @@ import { ContentPair } from '@/types';
 
 export const parseInput = (input: ContentPair): ContentPair[] => {
   const variables = input.left
-    .replace('Nhập', '')
-    .split(',')
-    .map((v) => v.trim());
+    .replace('Nhập', '') // Remove 'Nhập'
+    .replace(/[()]/g, '') // Remove parentheses
+    .split(',') // Split by commas
+    .map((v) => v.trim()); // Trim each variable
 
   return variables.map((variable) => ({
     left: variable,
