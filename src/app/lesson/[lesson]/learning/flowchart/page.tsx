@@ -5,6 +5,7 @@ import { Panel, PanelGroup, PanelResizeHandle } from 'react-resizable-panels';
 import {
   EBAssignment,
   EBPseudo,
+  EBQuest,
   Preview,
   PreviewAssignment,
   PreviewRunFlowchart
@@ -12,7 +13,6 @@ import {
 import { useContext, useEffect, useState } from 'react';
 import { useGetLessons } from '@/hooks';
 import { LessonContext } from '@/contexts';
-import EBQuest from '@/components/EditorBlock/EBQuest';
 
 function RunFlowChartScreen() {
   const [isShowAssignment, setIsShowAssignment] = useState(false);

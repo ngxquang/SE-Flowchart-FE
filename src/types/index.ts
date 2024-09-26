@@ -125,10 +125,14 @@ export type FlowchartProps = {
 export type FlowchartDynamicHandle = {
   next: () => void;
   prev: () => void;
+  stopRunAuto: () => void;
+  startRunAuto: () => void;
 };
 
 export type FlowchartDynamicProps = {
   pseudo: string;
+  isRunAuto: boolean;
+  setIsRunAuto: (value: boolean) => void;
 };
 
 export type ContentPair = {

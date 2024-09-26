@@ -18,13 +18,14 @@ import Search from './Search';
 import Modal_taoBT from './Modal';
 import ListGV from '@/components/ListGV';
 import ChapterCard from './ChapterCard';
+import EBQuest from './EditorBlock/EBQuest';
 
 export { classNames };
 export { ButtonBase, ButtonSolid, ButtonOutline };
 export { Input, InputRadio };
 export { Breadcrumb };
 export { DropListSV };
-export { EBAssignment, EBPseudo };
+export { EBAssignment, EBPseudo, EBQuest };
 export { Preview, PreviewAssignment, PreviewFlowchart, PreviewRunFlowchart };
 export { HeaderEditor, HeaderNormal };
 export { Search };
