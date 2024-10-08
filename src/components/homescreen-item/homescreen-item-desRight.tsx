@@ -22,7 +22,7 @@ function HomescreenItemDesRight({
           src={image}
         />
         <div className='ml-10 content-center w-full'>
-          <p className=" pl-12 text-3xl 2xl:text-5xl text-primary">
+          <p className=" pl-12 text-3xl 2xl:text-5xl text-primary2">
             {des}
           </p>
         </div>

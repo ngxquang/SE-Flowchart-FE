@@ -13,7 +13,7 @@ function HomescreenItemDesLeft({ title, des, image }: HomeScreenItemsProps) {
       {/* image & description */}
       <div className="mx-16 mb-auto flex flex-row justify-around 2xl:mx-20">
         <div className="mr-10 w-1/2 content-center">
-          <p className="pr-12 text-3xl text-primary 2xl:text-5xl">{des}</p>
+          <p className="pr-12 text-3xl text-primary2 2xl:text-5xl">{des}</p>
         </div>
         <Image alt="slider" className="w-[50%] self-center" src={image} />
       </div>

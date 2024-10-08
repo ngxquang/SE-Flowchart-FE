@@ -1,16 +1,16 @@
 'use client';
 
 import Image from 'next/image';
-import slide1 from '../../public/images/HS_Dashboard 1.svg';
-import slide2 from '../../public/images/SV_Danh sách đề 1.svg';
-import slide3 from '../../public/images/GV_Danh sách đề 1.svg';
-import slide4 from '../../public/images/SV_Xem chạy từng bước 1.svg';
+import slide1 from '../../public/images/HS_Dashboard_1.svg';
+import slide2 from '../../public/images/SV_Danh_sach_de_1.svg';
+import slide3 from '../../public/images/GV_Danh_sach_de_1.svg';
+import slide4 from '../../public/images/SV_Xem_chay_tung_buoc_1.svg';
 
-import Dashboard from '../../public/images/HS_Dashboard 2.svg';
-import TheoriesList from '../../public/images/SV_Danh sách đề 1.svg';
-import Theory from '../../public/images/SV_Xem đề LT 1.svg';
-import Step from '../../public/images/SV_Xem chạy từng bước 2.svg';
-import Do from '../../public/images/SV_Xem chạy thủ công 1.svg';
+import Dashboard from '../../public/images/HS_Dashboard_2.svg';
+import TheoriesList from '../../public/images/SV_Danh_sach_de_2.svg';
+import Theory from '../../public/images/SV_Xem_de_LT_1.svg';
+import Step from '../../public/images/SV_Xem_chay_tung_buoc_2.svg';
+import Do from '../../public/images/SV_Xem_chay_thu_cong_1.svg';
 import { Carousel } from '@/components';
 import { HomescreenItemDesLeft, HomescreenItemDesRight } from '@/components';
 

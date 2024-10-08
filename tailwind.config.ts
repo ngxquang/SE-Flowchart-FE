@@ -19,7 +19,7 @@ const config: Config = {
       },
     },
     colors: {
-      'primary': '#65558F',
+      'primary': '#2E3C63',
       'on-primary': '#FFFFFF',
       'secondary': '#FF6347',
       'on-secondary': '#FFFFFF',
@@ -37,7 +37,7 @@ const config: Config = {
       'on-surface': '#49454F',
       'error': '#D32F2F',
       'success': '#388E3C',
-
+      'primary2': '#65558F',
       'high': '#21005D'
     },
   },
