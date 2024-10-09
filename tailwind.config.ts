@@ -37,7 +37,8 @@ const config: Config = {
       'on-surface': '#49454F',
       'error': '#D32F2F',
       'success': '#388E3C',
-
+      'primary2': '#65558F',
+      'high': '#21005D'
     },
   },
   plugins: [],

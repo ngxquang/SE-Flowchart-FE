@@ -18,6 +18,9 @@ import Search from './Search';
 import Modal_taoBT from './Modal';
 import ListGV from '@/components/ListGV';
 import ChapterCard from './ChapterCard';
+import Carousel from './carousel/Carousel';
+import HomescreenItemDesLeft from './homescreen-item/homescreen-item-desLeft';
+import HomescreenItemDesRight from './homescreen-item/homescreen-item-desRight';
 
 export { classNames };
 export { ButtonBase, ButtonSolid, ButtonOutline };
@@ -31,3 +34,5 @@ export { Search };
 export { Modal_taoBT };
 export { ListGV };
 export { ChapterCard };
+export {Carousel};
+export {HomescreenItemDesRight, HomescreenItemDesLeft}
