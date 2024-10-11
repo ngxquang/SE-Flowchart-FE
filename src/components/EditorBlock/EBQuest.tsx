@@ -1,11 +1,18 @@
 import Image from 'next/image';
-import React, { useContext, useEffect, useState } from 'react';
+import React, {
+  MutableRefObject,
+  useContext,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import InputAssignment from '../Input/InputAssignment';
 import { LessonContext } from '@/contexts';
 import { ContentPair } from '@/types';
 import { NodeType } from '@/enums';
 import ButtonSolid from '../Button/ButtonSolid';
 import { convertContentPairToRecord } from '@/helpers';
+import { classNames } from '../classNames';
 
 type LessonContextType = {
   inputMode: boolean;
@@ -21,7 +28,7 @@ const EBQuest = () => {
   const { inputMode, setInputMode, contents, setInputs } = useContext(
     LessonContext
   ) as LessonContextType;
-  console.log('🚀 ~ EBQuest ~ contents:', contents);
+  const contentsEndRef = useRef<HTMLDivElement | null>(null);
 
   // xử lý ghi nhận nhiều input
   const handleInputChange = (index: number, value: string) => {
@@ -75,18 +82,32 @@ const EBQuest = () => {
       }, 3000);
   }, [inputStatus]);
 
+  useEffect(() => {
+    contentsEndRef.current?.scrollIntoView();
+  }, [contents]);
+
   // Hàm xử lý render step với component InputAssignment
   const renderContent = (content: ContentPair, index: number) => {
     if (content.type === NodeType.Oval) {
       return (
-        <>
+        <div
+          className={classNames(
+            index === contents.length - 1 ? 'bg-secondary-container' : '',
+            'flex w-full flex-row items-center p-1'
+          )}
+        >
           <React.Fragment>{content.left}</React.Fragment>
-        </>
+        </div>
       );
     } else if (content.type === NodeType.Parallelogram) {
       if (content.right)
         return (
-          <>
+          <div
+            className={classNames(
+              index === contents.length - 1 ? 'bg-secondary-container' : '',
+              'flex w-full flex-row items-center p-1'
+            )}
+          >
             <React.Fragment>
               <span>{content.left}: </span>
               <InputAssignment
@@ -97,7 +118,7 @@ const EBQuest = () => {
                 onChange={(value) => handleInputChange(index, value)}
               />
             </React.Fragment>
-          </>
+          </div>
         );
       return (
         <>
@@ -115,16 +136,26 @@ const EBQuest = () => {
       );
     } else if (content.type === NodeType.Rectangle) {
       return (
-        <>
+        <div
+          className={classNames(
+            index === contents.length - 1 ? 'bg-secondary-container' : '',
+            'flex w-full flex-row items-center p-1'
+          )}
+        >
           <React.Fragment>
             <span>{content.left} = </span>
             <span>{content.right}</span>
           </React.Fragment>
-        </>
+        </div>
       );
     } else if (content.type === NodeType.Diamond) {
       return (
-        <>
+        <div
+          className={classNames(
+            index === contents.length - 1 ? 'bg-secondary-container' : '',
+            'flex w-full flex-row items-center p-1'
+          )}
+        >
           <React.Fragment>
             <span>{content.left} </span>
             <InputAssignment
@@ -135,7 +166,7 @@ const EBQuest = () => {
               onChange={(value) => handleInputChange(index, value)}
             />
           </React.Fragment>
-        </>
+        </div>
       );
     }
   };
@@ -147,7 +178,7 @@ const EBQuest = () => {
   return (
     <div className="relative flex h-full w-full flex-col overflow-hidden rounded-xl border border-outline">
       {/* Quick Access Toolbar */}
-      <div className="relative mr-8 flex flex-shrink-0 items-center justify-between gap-4 overflow-x-auto bg-primary-container px-2 py-2">
+      <div className="relative flex flex-shrink-0 items-center justify-between gap-4 overflow-x-auto bg-primary-container px-2 py-2">
         <div className="flex select-none flex-row gap-3">
           <ButtonSolid
             content="Submit"
@@ -158,31 +189,22 @@ const EBQuest = () => {
           <span className="text-nowrap text-base font-thin">{inputStatus}</span>
         </div>
       </div>
-      {/* Button collapse editor */}
-      <div className="absolute right-0 top-0 bg-primary-container p-2">
-        <div className="flex size-6 justify-center rounded-full border border-primary">
-          <Image
-            alt="dropdown-icon"
-            src={'/icons/up.svg'}
-            width={10}
-            height={5}
-            className="select-none"
-          />
-        </div>
-      </div>
+
       {/* Content Display */}
       <div className="flex h-full w-full flex-grow overflow-hidden overflow-y-auto p-4">
-        <pre className="w-full overscroll-y-auto whitespace-pre-wrap break-words">
+        <pre className="no-scrollbar w-full overflow-y-auto whitespace-pre-wrap break-words">
           {/* Render từng step */}
           {contents.map((content: ContentPair, index) => (
             <div
-              className="flex flex-wrap items-center border-b border-outline p-1"
+              className="flex flex-wrap items-center border-b border-dashed border-outline"
               key={index}
             >
               {renderContent(content, index)}
               {/* {renderStepWithInput(content)} */}
             </div>
           ))}
+          {/* Scroll to div element, end of contents */}
+          <div ref={contentsEndRef} />
         </pre>
       </div>
     </div>

@@ -4,8 +4,8 @@ import { parsePseudoCode } from './parsePseudoCode';
 const pseudocodeRules = {
   BEGIN: /^BEGIN$/,
   END: /^END$/,
-  INPUT: /^INPUT\s+\w+(,\s*\w+)*\s*$/,
-  OUTPUT: /^OUTPUT\s+.+$/,
+  INPUT: /^INPUT\s*\(\s*\w+(\s*,\s*\w+)*\s*\)\s*$/,
+  OUTPUT: /^OUTPUT\s*\(\s*\w+(\s*,\s*\w+)*\s*\)|"(.*)"\s*$/,
   IF: /^IF\s+.+\s+DO$/,
   ELSE: /^ELSE$/,
   ENDIF: /^ENDIF$/,

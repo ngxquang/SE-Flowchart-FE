@@ -19,8 +19,8 @@ export function parsePseudoCode(pseudoCode: string): FlowNode[] {
 
   const variableRegex = /^[a-zA-Z][a-zA-Z0-9]*$/;
   const processRegex = /^([a-zA-Z][a-zA-Z0-9]*)\s*=\s*(.+)$/;
-  const inputRegex = /^INPUT\s+(.+)$/;
-  const outputRegex = /^OUTPUT\s+(.+)$/;
+  const inputRegex = /^INPUT\s*\((.*)\)$/i;
+  const outputRegex = /^OUTPUT\s*\((.*)\)|"(.*)"\s*$/i;
   const whileRegex = /^WHILE\s+(.+)\s+DO$/;
   const endwhileRegex = /^ENDWHILE$/;
   const ifRegex = /^IF\s+(.+)\s+DO$/;
@@ -35,16 +35,31 @@ export function parsePseudoCode(pseudoCode: string): FlowNode[] {
     if (line.startsWith('INPUT')) {
       const variables =
         line
-          .match(inputRegex)?.[1]
+          .match(inputRegex)?.[1] // Extract the part inside the parentheses
           .split(',')
-          .map((v) => v.trim()) || [];
+          .map((v) => v.trim()) || []; // Split by commas and trim whitespace
       stack[stack.length - 1].push(new InputNode(variables));
     } else if (line.startsWith('OUTPUT')) {
-      const variables =
-        line
-          .match(outputRegex)?.[1]
-          .split(',')
-          .map((v) => v.trim()) || [];
+      const match = line.match(outputRegex);
+
+      console.log(match);
+
+      let variables: string[] | string;
+      variables = '';
+
+      if (match) {
+        if (match[1]) {
+          variables =
+            line
+              .match(outputRegex)?.[1] // Extract the part inside the parentheses
+              .split(',')
+              .map((v) => v.trim()) || []; // Split by commas and trim whitespace
+        }
+        if (match[2]) {
+          variables = match[2];
+        }
+      }
+
       stack[stack.length - 1].push(new OutputNode(variables));
     } else if (processRegex.test(line)) {
       const [, variable, formulaOrValue] = line.match(processRegex) || [];

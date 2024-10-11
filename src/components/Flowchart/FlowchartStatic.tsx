@@ -1,3 +1,10 @@
+import {
+  arrowSizes,
+  circleRadius,
+  fontInfo,
+  lineSizes,
+  rectangleSizes
+} from '@/constants';
 import { parsePseudoCode } from '@/helpers';
 import {
   Flowchart,
@@ -13,11 +20,11 @@ const FlowchartStatic = ({ pseudo }: FlowchartProps) => {
 
   // Điều chỉnh kích thức các khối, mũi tên
   const configurer = new FlowchartConfigurer();
-  configurer.setRectangleSizes(150, 45);
-  configurer.setArrowSizes(5, 10);
-  configurer.setLineSizes(25, 25);
-  configurer.setCircleRadius(10);
-  configurer.setFontInfo('14px sans-serif', 'black');
+  configurer.setRectangleSizes(rectangleSizes.width, rectangleSizes.height);
+  configurer.setArrowSizes(arrowSizes.width, arrowSizes.height);
+  configurer.setLineSizes(lineSizes.width, lineSizes.height);
+  configurer.setCircleRadius(circleRadius);
+  configurer.setFontInfo(fontInfo.family, fontInfo.color);
 
   useEffect(() => {
     // parse từ mã giả sang cấu trúc FlowNode

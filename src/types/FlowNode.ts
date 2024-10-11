@@ -76,7 +76,7 @@ export class InputNode extends FlowNode {
   variables: string[];
 
   constructor(variables: string[]) {
-    super('Nhập ' + variables.join(', '), NodeType.Parallelogram);
+    super('Nhập (' + variables.join(', ') + ')', NodeType.Parallelogram);
     this.variables = variables;
   }
 
@@ -92,18 +92,25 @@ export class InputNode extends FlowNode {
 
 // Node xuất giá trị
 export class OutputNode extends FlowNode {
-  variables: string[];
+  variables!: string[] | string;
 
-  constructor(variables: string[]) {
-    super('Xuất ' + variables.join(', '), NodeType.Parallelogram);
-    this.variables = variables;
+  constructor(variables: string[] | string) {
+    if (variables instanceof Array) {
+      super('Xuất (' + variables.join(', ') + ')', NodeType.Parallelogram);
+      this.variables = variables;
+    } else if (typeof variables === 'string') {
+      super('Xuất "' + variables + '"', NodeType.Parallelogram);
+      this.variables = variables;
+    }
   }
 
   execute(variables: Record<string, number>) {
-    const outputValues = this.variables.map(
-      (variable) => `${variable} = ${variables[variable]?.toString()}`
-    );
-    console.log(`${this.content}: ${outputValues.join(', ')}`);
+    if (this.variables instanceof Array) {
+      const outputValues = this.variables.map(
+        (variable) => `${variable} = ${variables[variable]?.toString()}`
+      );
+      console.log(`${this.content}: ${outputValues.join(', ')}`);
+    }
   }
 }
 

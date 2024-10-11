@@ -14,7 +14,9 @@ export async function generateSteps(
   const variables: Record<string, number> = {}; // Initialize an empty record for variables
 
   async function executeNode(node: FlowNode) {
-    if (node instanceof InputNode) {
+    if (node instanceof TempNode) {
+      return;
+    } else if (node instanceof InputNode) {
       steps.push(node.id);
       node.execute(variables, inputs);
     } else if (node instanceof WhileNode) {

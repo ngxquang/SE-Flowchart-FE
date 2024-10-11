@@ -25,6 +25,14 @@ import {
   InputNode
 } from '@/types';
 import { LessonContext } from '@/contexts';
+import {
+  arrowSizes,
+  circleRadius,
+  currNodeColor,
+  fontInfo,
+  lineSizes,
+  rectangleSizes
+} from '@/constants';
 
 type LessonContextType = {
   inputMode: boolean;
@@ -38,7 +46,7 @@ type LessonContextType = {
 const FlowchartDynamic = forwardRef<
   FlowchartDynamicHandle,
   FlowchartDynamicProps
->(({ pseudo }, ref) => {
+>(({ pseudo, isRunAuto, setIsRunAuto }, ref) => {
   const [drawer, setDrawer] = useState<Flowchart>();
   const [positions, setPositions] = useState<IFlowchartPosition[][]>([]);
   const [flowchart, setFlowchart] = useState<FlowNode[]>([]);
@@ -50,16 +58,17 @@ const FlowchartDynamic = forwardRef<
   const [currContents, setCurrContents] = useState<ContentPair[]>([]);
 
   const prevStepRef = useRef<number>(step);
+  const intervalStepRef = useRef<NodeJS.Timeout | null>(null);
   const { inputMode, setInputMode, contents, setContents, inputs, setInputs } =
     useContext(LessonContext) as LessonContextType;
 
   // Điều chỉnh kích thức các khối, mũi tên
   const configurer = new FlowchartConfigurer();
-  configurer.setRectangleSizes(150, 45);
-  configurer.setArrowSizes(5, 10);
-  configurer.setLineSizes(25, 25);
-  configurer.setCircleRadius(10);
-  configurer.setFontInfo('14px sans-serif', 'black');
+  configurer.setRectangleSizes(rectangleSizes.width, rectangleSizes.height);
+  configurer.setArrowSizes(arrowSizes.width, arrowSizes.height);
+  configurer.setLineSizes(lineSizes.width, lineSizes.height);
+  configurer.setCircleRadius(circleRadius);
+  configurer.setFontInfo(fontInfo.family, fontInfo.color);
 
   useEffect(() => {
     // parse từ mã giả sang cấu trúc FlowNode
@@ -114,7 +123,11 @@ const FlowchartDynamic = forwardRef<
         setContents(newContents);
 
         const currFlowchart = [...flowchart];
-        const newFlowchart = setNodeColor(currFlowchart, steps[step], '#fafa');
+        const newFlowchart = setNodeColor(
+          currFlowchart,
+          steps[step],
+          currNodeColor
+        );
         drawer?.generateShapes(newFlowchart);
 
         prevStepRef.current = step;
@@ -129,6 +142,11 @@ const FlowchartDynamic = forwardRef<
       setStep(-1);
       setContents([]);
       setInputs({});
+      if (intervalStepRef.current !== null) {
+        clearInterval(intervalStepRef.current); // Xoá setInterval bằng ID lưu trong useRef
+        intervalStepRef.current = null; // Đặt lại giá trị của intervalRef
+      }
+      setIsRunAuto(false);
       return;
     }
 
@@ -151,7 +169,11 @@ const FlowchartDynamic = forwardRef<
       console.log('🚀 ~ useEffect ~ contents:', contents);
       // render lại lưu đồ
       const currFlowchart = [...flowchart];
-      const newFlowchart = setNodeColor(currFlowchart, steps[step], '#fafa');
+      const newFlowchart = setNodeColor(
+        currFlowchart,
+        steps[step],
+        currNodeColor
+      );
       drawer?.generateShapes(newFlowchart);
 
       prevStepRef.current = step;
@@ -174,11 +196,25 @@ const FlowchartDynamic = forwardRef<
 
     // render lại flowchart
     const currFlowchart = [...flowchart];
-    const newFlowchart = setNodeColor(currFlowchart, steps[step], '#fafa');
+    const newFlowchart = setNodeColor(
+      currFlowchart,
+      steps[step],
+      currNodeColor
+    );
     drawer?.generateShapes(newFlowchart);
 
     prevStepRef.current = step;
   }, [step, currContents]);
+
+  useEffect(() => {
+    if (step === steps.length - 1) {
+      if (isRunAuto && intervalStepRef.current !== null) {
+        clearInterval(intervalStepRef.current); // Xoá setInterval bằng ID lưu trong useRef
+        intervalStepRef.current = null; // Đặt lại giá trị của intervalRef
+      }
+      setIsRunAuto(false);
+    }
+  }, [step]);
 
   // Bắt sự kiện inputs thay đổi để tạo contents và steps mới
   useEffect(() => {
@@ -199,6 +235,36 @@ const FlowchartDynamic = forwardRef<
       },
       prev() {
         setStep((prev) => prev - 1);
+      },
+      stopRunAuto() {
+        if (intervalStepRef.current !== null) {
+          clearInterval(intervalStepRef.current); // Xoá setInterval bằng ID lưu trong useRef
+          intervalStepRef.current = null; // Đặt lại giá trị của intervalRef
+        }
+      },
+      startRunAuto() {
+        if (intervalStepRef.current === null) {
+          // Kiểm tra nếu chưa có interval nào đang chạy
+          intervalStepRef.current = setInterval(() => {
+            setStep((prev) => prev + 1);
+          }, 1000);
+        }
+      },
+      backwardToStart() {
+        if (intervalStepRef.current === null) {
+          // Kiểm tra nếu chưa có interval nào đang chạy
+          intervalStepRef.current = setInterval(() => {
+            setStep((prev) => prev - 1);
+          }, 100);
+        }
+      },
+      forwardToEnd() {
+        if (intervalStepRef.current === null) {
+          // Kiểm tra nếu chưa có interval nào đang chạy
+          intervalStepRef.current = setInterval(() => {
+            setStep((prev) => prev + 1);
+          }, 0);
+        }
       }
     }),
     []
