@@ -173,3 +173,9 @@ export {
 };
 
 export { FlowchartConfigurer, FlowchartPositions, Flowchart };
+
+export type HomeScreenItemsProps = {
+  title: string;
+  des: string;
+  image:string;
+};
