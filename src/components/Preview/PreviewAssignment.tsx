@@ -6,7 +6,7 @@ import rehypeKatex from 'rehype-katex';
 import remarkMath from 'remark-math';
 import remarkGfm from 'remark-gfm';
 
-const PreviewAssignment = () => {
+const PreviewAssignment = ({ onCollapse }: { onCollapse: () => void }) => {
   const { markdown } = useContext(LessonContext);
 
   return (
@@ -19,7 +19,21 @@ const PreviewAssignment = () => {
           </span>
         </div>
       </div>
-
+      {/* Button collapse editor */}
+      <div className="absolute right-0 top-0 bg-primary-container p-2">
+        <div
+          className="flex size-6 justify-center rounded-full border border-primary "
+          onClick={onCollapse}
+        >
+          <Image
+            alt="dropdown-icon"
+            src={'/icons/up.svg'}
+            width={10}
+            height={5}
+            className="select-none"
+          />
+        </div>
+      </div>
       {/* Preview */}
       <div className="flex h-full w-full flex-grow overflow-hidden overflow-y-auto">
         <div className=" m-2 flex-grow overflow-x-auto">

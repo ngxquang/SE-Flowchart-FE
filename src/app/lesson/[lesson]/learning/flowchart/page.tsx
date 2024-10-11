@@ -79,7 +79,7 @@ function RunFlowChartScreen() {
                     defaultSize={50}
                     className=""
                   >
-                    <PreviewAssignment />
+                    <PreviewAssignment onCollapse={handleCollapseOrExpandDe} />
                   </Panel>
                   <PanelResizeHandle className="h-2 bg-on-primary" />
                   {/* Bottom-left panel */}
@@ -109,7 +109,7 @@ function RunFlowChartScreen() {
                   )}
                   {/* Bottom-left */}
                   {isShowPseudo ? (
-                    <EBPseudo onCollapse={handldeCollapseOrExpandPseudo} />
+                    <EBQuest />
                   ) : (
                     <div
                       className="flex h-8 w-full items-center justify-center rounded-xl border border-outline bg-primary-container"

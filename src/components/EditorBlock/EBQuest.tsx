@@ -178,7 +178,7 @@ const EBQuest = () => {
   return (
     <div className="relative flex h-full w-full flex-col overflow-hidden rounded-xl border border-outline">
       {/* Quick Access Toolbar */}
-      <div className="relative mr-8 flex flex-shrink-0 items-center justify-between gap-4 overflow-x-auto bg-primary-container px-2 py-2">
+      <div className="relative flex flex-shrink-0 items-center justify-between gap-4 overflow-x-auto bg-primary-container px-2 py-2">
         <div className="flex select-none flex-row gap-3">
           <ButtonSolid
             content="Submit"
@@ -189,18 +189,7 @@ const EBQuest = () => {
           <span className="text-nowrap text-base font-thin">{inputStatus}</span>
         </div>
       </div>
-      {/* Button collapse editor */}
-      <div className="absolute right-0 top-0 bg-primary-container p-2">
-        <div className="flex size-6 justify-center rounded-full border border-primary">
-          <Image
-            alt="dropdown-icon"
-            src={'/icons/up.svg'}
-            width={10}
-            height={5}
-            className="select-none"
-          />
-        </div>
-      </div>
+
       {/* Content Display */}
       <div className="flex h-full w-full flex-grow overflow-hidden overflow-y-auto p-4">
         <pre className="no-scrollbar w-full overflow-y-auto whitespace-pre-wrap break-words">
