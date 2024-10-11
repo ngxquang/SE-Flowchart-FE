@@ -124,18 +124,20 @@ export default function ListGV({
           ''
         )}
         {/** handle Tạo */}
-        <div onClick={() => handleOpenModal}>
-          <ButtonSolid
-            iconLeft={
-              <PlusIcon className={classNames('size-6 text-on-primary')} />
-            }
-            content={'Tạo'}
-            isPrimary={true}
-            className={classNames(
-              'h-[56px] w-[152px] items-center justify-center rounded-xl active:brightness-90'
-            )}
-          />
-        </div>
+
+        <Modal_taoBT
+          onSubmit={() => console.log('Form submitted!')}
+          triggerButton={
+            <div onClick={() => {}}>
+              <ButtonSolid
+                iconLeft={<PlusIcon className="size-6 text-on-primary" />}
+                content={'Tạo'}
+                isPrimary={true}
+                className="h-[56px] w-[152px] items-center justify-center rounded-xl active:brightness-90"
+              />
+            </div>
+          }
+        />
       </div>
       <div
         className={classNames(
@@ -262,7 +264,6 @@ export default function ListGV({
           />
         </div>
       </div>
-      {isModalOpen && <Modal_taoBT />}
     </div>
   );
 }

@@ -25,7 +25,7 @@ function InputRadio({
         />
         <div className="absolute xl:top-2.5 top-3 lg:top-2.5 flex w-full flex-row justify-evenly">
           {radioValues.map((radioValue) => (
-            <div className="flex flex-row gap-4">
+            <div key={radioValue} className="flex flex-row gap-4">
               <input
                 type="radio"
                 key={radioValue}
