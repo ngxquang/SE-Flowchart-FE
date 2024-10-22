@@ -13,8 +13,8 @@ export const arrowSizes: { width: number; height: number } = {
 };
 
 export const lineSizes: { width: number; height: number } = {
-  width: 25,
-  height: 25
+  width: 40,
+  height: 40
 };
 
 export const circleRadius: number = 10;

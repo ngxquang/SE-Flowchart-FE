@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import React, { useContext, useState } from 'react';
 import { LessonContext } from '@/contexts';

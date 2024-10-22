@@ -37,3 +37,6 @@ export function setNodeColor(
 
   return newFlowchart;
 }
+
+// Nhận đầu vào là một flowchart, vị trí node cần tô màu, màu
+// Trả về một flowchart với node đã đổi màu

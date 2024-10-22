@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useContext, useRef, useState } from 'react';
 import { LessonContext } from '@/contexts';
 import { checkPseudocodeSyntax } from '@/helpers';

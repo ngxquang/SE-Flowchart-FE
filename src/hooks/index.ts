@@ -1,3 +1,5 @@
+'use client';
+
 import { useGetUser, useGetUsers } from './useUserService';
 import { useGetGroups } from './useGroupService';
 import { useGetLesson, useGetLessons, useAddLesson } from './useLessonService';
