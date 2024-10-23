@@ -1,5 +1,5 @@
 // Màu của các khối chạy từng bước
-export const currNodeColor: string = '#FFE6E1';
+export const currNodeColor: string = '#FFC107';
 
 // Size for flowchart
 export const rectangleSizes: { width: number; height: number } = {

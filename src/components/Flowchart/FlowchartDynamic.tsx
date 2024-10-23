@@ -22,7 +22,8 @@ import {
   FlowchartPositions,
   FlowNode,
   IFlowchartPosition,
-  InputNode
+  InputNode,
+  StartNode
 } from '@/types';
 import { LessonContext } from '@/contexts';
 import {
@@ -122,6 +123,8 @@ const FlowchartDynamic = forwardRef<
         );
         setContents(newContents);
 
+        if (step === 0) setInputs({});
+
         const currFlowchart = [...flowchart];
         const newFlowchart = setNodeColor(
           currFlowchart,
@@ -180,13 +183,15 @@ const FlowchartDynamic = forwardRef<
       return;
     }
 
-    // xử lý các node thông thường
+    // xử lý các node HIỆN TẠI là thông thường
     if (step > prevStep) {
+      // Forward
       const newContents = [...contents];
       const content = currContents[step];
       newContents.push(content);
       setContents(newContents);
     } else if (step < prevStep) {
+      // Backward
       const newContents = [...contents];
       console.log('🚀 ~ useEffect ~ ddnewContents:', newContents);
       newContents.pop();

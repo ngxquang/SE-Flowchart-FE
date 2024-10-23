@@ -10,7 +10,7 @@ import React, {
 } from 'react';
 import InputAssignment from '../Input/InputAssignment';
 import { LessonContext } from '@/contexts';
-import { ContentPair } from '@/types';
+import { ContentPair, ValidType } from '@/types';
 import { NodeType } from '@/enums';
 import ButtonSolid from '../Button/ButtonSolid';
 import { convertContentPairToRecord } from '@/helpers';
@@ -22,33 +22,34 @@ type LessonContextType = {
   setInputMode: (value: boolean) => void;
   contents: ContentPair[];
   setInputs: (value: Record<string, number>) => void;
-  // setContents: (value: ContentPair[]) => void;
+  setIsCurrentStepValid: (value: ValidType) => void;
+  registerPrevStepTrigger: (callback: () => void) => void;
 };
 
 const currColorContent = `bg-secondary`;
 
-const EBQuest = () => {
-  const [inputValues, setInputValues] = useState<string[]>([]);
+const EBInputQuest = () => {
+  const [inputValues, setInputValues] = useState<
+    { value: string; valid: ValidType }[]
+  >([]);
   const [inputStatus, setInputStatus] = useState<string>('');
-  const { inputMode, setInputMode, contents, setInputs } = useContext(
-    LessonContext
-  ) as LessonContextType;
+  const {
+    inputMode,
+    setInputMode,
+    contents,
+    setInputs,
+    setIsCurrentStepValid,
+    registerPrevStepTrigger
+  } = useContext(LessonContext) as LessonContextType;
   const contentsEndRef = useRef<HTMLDivElement | null>(null);
+
+  // handlePrevStep called in PreviewInputFlowchart
 
   // xử lý ghi nhận nhiều input
   const handleInputChange = (index: number, value: string) => {
     const newInputValues = [...inputValues];
-    newInputValues[index] = value; // Cập nhật giá trị tại index
+    newInputValues[index] = { value, valid: 'default' }; // Cập nhật giá trị tại index
     setInputValues(newInputValues);
-
-    // Xử lý logic valid trạng thái
-    // const newValidStates = [...validStates];
-    // if (value.trim() === '') {
-    //   newValidStates[index] = 'error';
-    // } else {
-    //   newValidStates[index] = 'success';
-    // }
-    // setValidStates(newValidStates);
   };
 
   // Kiểm tra các input đã được nhập hết chưa -> nếu rồi thì trả dữ liệu cho FlowchartDynamic
@@ -63,7 +64,9 @@ const EBQuest = () => {
     );
     const testInput = inputValues.filter((x) => x !== null && x !== undefined);
 
-    const allFilled = testInput.every((value) => value && value.trim() !== '');
+    const allFilled = testInput.every(
+      (input) => input && input.value.trim() !== ''
+    );
     if (
       inputValues.length > 0 &&
       testInput.length === inputs.length &&
@@ -71,7 +74,7 @@ const EBQuest = () => {
     ) {
       setInputStatus('All inputs are filled');
       inputs.forEach((input, index) => {
-        input.right = testInput[index];
+        input.right = testInput[index].value;
       });
       setInputMode(false);
       setInputs(convertContentPairToRecord(inputs));
@@ -79,6 +82,45 @@ const EBQuest = () => {
       setInputStatus('Some inputs are missing values');
     }
   };
+
+  // Kiểm tra kết quả nhập
+  const handleCheck = (index: number, value: string, contentRight: string) => {
+    // Xử lý kết quả
+    const newInputValues = [...inputValues];
+    newInputValues[index].valid = value == contentRight ? 'success' : 'error'; // Cập nhật giá trị tại index, xác định xem tại đó sinh viên đã điền đúng hay sai
+    setInputValues(newInputValues);
+
+    if (newInputValues[index].valid === 'success') {
+      setIsCurrentStepValid('success');
+    }
+    console.log('🚀 ~ handleInputChange ~ newInputValues:', inputValues);
+  };
+
+  const handlePrevStepInEBInputQuest = (
+    inputValues: { value: string; valid: ValidType }[],
+    currContents: ContentPair[]
+  ) => {
+    console.log('handlePrevStep called in PreviewInputFlowchartt');
+
+    const newInputValues = inputValues.filter(
+      (_, index) => index <= currContents.length - 2
+    );
+    console.log('inputValues length:', inputValues.length);
+    console.log('contents length:', currContents.length);
+    setInputValues(newInputValues);
+    console.log('🚀 ~ EBInputQuest ~ newInputValues:', newInputValues);
+  };
+
+  useEffect(() => {
+    // Register a callback that fetches the latest inputValues when called
+    registerPrevStepTrigger(() => {
+      setInputValues((currentValues) => {
+        handlePrevStepInEBInputQuest(currentValues, contents); // Use the latest inputValues in the state
+        return currentValues; // Return the same values as no change is being made here
+      });
+    });
+    // Register the function / Đăng ký hàm được sẽ được gọi lại (thực thi). Tức handlePrevStepInEBInputQuest
+  }, [registerPrevStepTrigger, contents]);
 
   useEffect(() => {
     if (inputStatus)
@@ -106,6 +148,7 @@ const EBQuest = () => {
       );
     } else if (content.type === NodeType.Parallelogram) {
       if (content.right)
+        // OUTPUT or Completed INPUT
         return (
           <div
             className={classNames(
@@ -126,20 +169,23 @@ const EBQuest = () => {
           </div>
         );
       return (
+        // INPUT
         <>
           <React.Fragment>
-            <span>{content.left}: </span>
+            <span>Nhập {content.left}: </span>
             <InputAssignment
               key={index}
               type="number"
               title="test"
               readOnly={!inputMode}
               onChange={(value) => handleInputChange(index, value)}
+              autoFocus={index === contents.length - 1}
             />
           </React.Fragment>
         </>
       );
     } else if (content.type === NodeType.Rectangle) {
+      // Biểu thức tính toán
       return (
         <div
           className={classNames(
@@ -149,11 +195,23 @@ const EBQuest = () => {
         >
           <React.Fragment>
             <span>{content.left} = </span>
-            <span>{content.right}</span>
+            <InputAssignment
+              key={index}
+              // value={inputValues[index].value}
+              title="test"
+              readOnly={!(index === contents.length - 1)}
+              valid={inputValues[index] ? inputValues[index].valid : 'default'}
+              onChange={(value) => handleInputChange(index, value)}
+              onEnter={(e) =>
+                handleCheck(index, inputValues[index].value, content.right)
+              }
+              autoFocus={index === contents.length - 1}
+            />
           </React.Fragment>
         </div>
       );
     } else if (content.type === NodeType.Diamond) {
+      // Câu điều kiện
       return (
         <div
           className={classNames(
@@ -165,10 +223,15 @@ const EBQuest = () => {
             <span>{content.left} </span>
             <InputAssignment
               key={index}
-              value={content.right}
+              // value={inputValues[index].value}
               title="test"
-              readOnly={true}
+              valid={inputValues[index] ? inputValues[index].valid : 'default'}
+              readOnly={!(index === contents.length - 1)}
               onChange={(value) => handleInputChange(index, value)}
+              onEnter={(e) =>
+                handleCheck(index, inputValues[index].value, content.right)
+              }
+              autoFocus={index === contents.length - 1}
             />
           </React.Fragment>
         </div>
@@ -216,4 +279,4 @@ const EBQuest = () => {
   );
 };
 
-export default EBQuest;
+export default EBInputQuest;

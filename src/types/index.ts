@@ -27,6 +27,8 @@ export type InputProps = {
   required?: boolean;
   type?: string;
   suport?: string;
+  onEnter?: (e: any) => void;
+  autoFocus?: boolean;
 };
 
 export type ButtonProps = {
@@ -143,6 +145,8 @@ export type ContentPair = {
   type: NodeType;
 };
 
+export type ValidType = 'success' | 'error' | 'default' | undefined;
+
 export interface IFlowchartConfig {
   rectangleWidth: number;
   rectangleHeight: number;
@@ -177,5 +181,5 @@ export { FlowchartConfigurer, FlowchartPositions, Flowchart };
 export type HomeScreenItemsProps = {
   title: string;
   des: string;
-  image:string;
+  image: string;
 };

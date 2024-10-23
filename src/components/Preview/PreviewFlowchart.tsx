@@ -26,6 +26,10 @@ const PreviewFlowchart = () => {
     route.push(`learning/flowchart`);
   };
 
+  const handleNavigateInputFlowchart = () => {
+    route.push(`learning/input-flowchart`);
+  };
+
   return (
     <div className="relative flex h-full w-full flex-col overflow-hidden rounded-xl">
       {/* Quick Access Toolbar */}
@@ -46,6 +50,7 @@ const PreviewFlowchart = () => {
           content="Chạy thủ công"
           isPrimary={false}
           className="h-6"
+          onClick={handleNavigateInputFlowchart}
         />
       </div>
 

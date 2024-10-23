@@ -42,7 +42,7 @@ export function parsePseudoCode(pseudoCode: string): FlowNode[] {
     } else if (line.startsWith('OUTPUT')) {
       const match = line.match(outputRegex);
 
-      console.log(match);
+      // console.log(match);
 
       let variables: string[] | string;
       variables = '';
@@ -101,7 +101,7 @@ export function parsePseudoCode(pseudoCode: string): FlowNode[] {
   });
 
   if (lines[lines.length - 1] === 'END') flowNodes.push(new EndNode());
-  console.log('🚀 ~ parsePseudoCode ~ flowNodes:', flowNodes);
+  // console.log('🚀 ~ parsePseudoCode ~ flowNodes:', flowNodes);
 
   return flowNodes;
 }
