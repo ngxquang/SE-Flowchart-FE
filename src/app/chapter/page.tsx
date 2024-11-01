@@ -13,8 +13,9 @@ export default function ChapterListScreen() {
 
   return (
     <div className="flex flex-col justify-evenly gap-12 p-12 sm:flex-row">
-      {chapters.map((chapter) => (
+      {chapters.map((chapter, index) => (
         <ChapterCard
+          key={index}
           id={chapter.id}
           title={chapter.title}
           content={chapter.content}

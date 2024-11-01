@@ -13,8 +13,11 @@ import Step from '../../public/images/SV_Xem_chay_tung_buoc_2.svg';
 import Do from '../../public/images/SV_Xem_chay_thu_cong_1.svg';
 import { Carousel } from '@/components';
 import { HomescreenItemDesLeft, HomescreenItemDesRight } from '@/components';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const route = useRouter();
+
   const slides = [
     {
       src: slide1,
@@ -76,6 +79,7 @@ export default function Home() {
               <button
                 className="rounded-[5px] bg-high px-4 py-2 text-xl text-on-primary
           transition-shadow duration-1000 hover:-translate-y-[3px] hover:bg-primary hover:text-primary-container hover:shadow-lg"
+                onClick={() => route.push('chapter')}
               >
                 Get started
               </button>

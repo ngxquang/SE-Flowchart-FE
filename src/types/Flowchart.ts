@@ -1040,7 +1040,7 @@ export class Flowchart {
             );
             break;
           }
-          this.lineLeftLineLeftForIf(prevNode.id, id, 'black', 0.5, 0.5, 4);
+          this.lineLeftLineLeftForIf(prevNode.id, id, 'black', 0.5, 0.5, 3);
         }
         break;
       default:

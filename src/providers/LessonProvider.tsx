@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { LessonContext } from '@/contexts';
-import { ContentPair } from '@/types';
+import { ContentPair, ValidType } from '@/types';
 
 function LessonProvider({ children }: { children: React.ReactNode }) {
   const [markdown, setMarkdown] = useState<string>('');
@@ -10,6 +10,17 @@ function LessonProvider({ children }: { children: React.ReactNode }) {
   const [inputMode, setInputMode] = useState<boolean>(false);
   const [contents, setContents] = useState<ContentPair[]>([]);
   const [inputs, setInputs] = useState<Record<string, number>>({});
+  const [isCurrentStepValid, setIsCurrentStepValid] =
+    useState<ValidType>('default');
+  const handlePrevStepTriggerRef = useRef<() => void>(() => {});
+
+  const registerPrevStepTrigger = useCallback((callback: () => void) => {
+    handlePrevStepTriggerRef.current = callback;
+  }, []);
+
+  const handlePrevStepTrigger = useCallback(() => {
+    handlePrevStepTriggerRef.current();
+  }, []);
 
   return (
     <LessonContext.Provider
@@ -23,7 +34,11 @@ function LessonProvider({ children }: { children: React.ReactNode }) {
         contents,
         setContents,
         inputs,
-        setInputs
+        setInputs,
+        isCurrentStepValid,
+        setIsCurrentStepValid,
+        registerPrevStepTrigger,
+        handlePrevStepTrigger
       }}
     >
       {children}

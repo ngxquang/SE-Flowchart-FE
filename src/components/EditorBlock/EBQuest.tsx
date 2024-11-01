@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import React, {
   MutableRefObject,
@@ -13,6 +15,7 @@ import { NodeType } from '@/enums';
 import ButtonSolid from '../Button/ButtonSolid';
 import { convertContentPairToRecord } from '@/helpers';
 import { classNames } from '../classNames';
+import { currNodeColor } from '@/constants';
 
 type LessonContextType = {
   inputMode: boolean;
@@ -21,6 +24,8 @@ type LessonContextType = {
   setInputs: (value: Record<string, number>) => void;
   // setContents: (value: ContentPair[]) => void;
 };
+
+const currColorContent = `bg-secondary`;
 
 const EBQuest = () => {
   const [inputValues, setInputValues] = useState<string[]>([]);
@@ -92,7 +97,7 @@ const EBQuest = () => {
       return (
         <div
           className={classNames(
-            index === contents.length - 1 ? 'bg-secondary-container' : '',
+            index === contents.length - 1 ? currColorContent : '',
             'flex w-full flex-row items-center p-1'
           )}
         >
@@ -104,7 +109,7 @@ const EBQuest = () => {
         return (
           <div
             className={classNames(
-              index === contents.length - 1 ? 'bg-secondary-container' : '',
+              index === contents.length - 1 ? currColorContent : '',
               'flex w-full flex-row items-center p-1'
             )}
           >
@@ -138,7 +143,7 @@ const EBQuest = () => {
       return (
         <div
           className={classNames(
-            index === contents.length - 1 ? 'bg-secondary-container' : '',
+            index === contents.length - 1 ? currColorContent : '',
             'flex w-full flex-row items-center p-1'
           )}
         >
@@ -152,7 +157,7 @@ const EBQuest = () => {
       return (
         <div
           className={classNames(
-            index === contents.length - 1 ? 'bg-secondary-container' : '',
+            index === contents.length - 1 ? currColorContent : '',
             'flex w-full flex-row items-center p-1'
           )}
         >

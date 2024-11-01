@@ -11,3 +11,15 @@ export function convertContentPairToRecord(
     {}
   );
 }
+
+// const contents: ContentPair[] = [
+//   { left: 'a', right: '5', type: NodeType.SomeType },
+//   { left: 'b', right: '10', type: NodeType.SomeType }
+// ];
+
+// const result = convertContentPairToRecord(contents);
+
+// {
+//   a: 5,
+//   b: 10
+// }

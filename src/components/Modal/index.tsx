@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import {
   Modal,
@@ -11,11 +13,16 @@ import { Input, InputRadio } from '@/components';
 import { Modal_taoBTProps } from '@/types';
 
 // Danh sách các nhóm bài
-const NhombaiList = ['Nhóm bài 1', 'Nhóm bài 2', 'Nhóm bài 3','Nhóm bài 4', 'Nhóm bài 5', 'Nhóm bài 6'];
+const NhombaiList = [
+  'Nhóm bài 1',
+  'Nhóm bài 2',
+  'Nhóm bài 3',
+  'Nhóm bài 4',
+  'Nhóm bài 5',
+  'Nhóm bài 6'
+];
 
-export default function Modal_taoBT({
-  onSubmit,
-}: Modal_taoBTProps) {
+export default function Modal_taoBT({ onSubmit }: Modal_taoBTProps) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const [inputValue_Nhombai, setInputValue_Nhombai] = useState('');
   const [inputValid_Nhombai, setInputValid_Nhombai] = useState<
@@ -97,7 +104,7 @@ export default function Modal_taoBT({
               <div className=" text-2xl text-on-primary ">Tạo bài tập</div>
             </ModalHeader>
             <ModalBody>
-              <div className="px-8 pt-6 2xl:pt-8 space-y-4">
+              <div className="space-y-4 px-8 pt-6 2xl:pt-8">
                 <div className="relative">
                   <Input
                     title="Nhóm bài"
@@ -109,14 +116,14 @@ export default function Modal_taoBT({
                     suport={inputValid_Nhombai === 'error' ? 'Sai bét' : ''}
                   />
                   {nhombaiResults.length > 0 && (
-                    <ul className='absolute z-50 w-full bg-on-primary shadow-lg max-h-36 overflow-y-auto'>
+                    <ul className="absolute z-50 max-h-36 w-full overflow-y-auto bg-on-primary shadow-lg">
                       {nhombaiResults.map((result, index) => (
                         <li
-                          className="border shadow-lg border-outline-var hover:bg-primary-container "
+                          className="border border-outline-var shadow-lg hover:bg-primary-container "
                           key={index}
                           onClick={() => clickSearchNhombai(result)}
                         >
-                          <p className='my-2 ml-4'>{result}</p>
+                          <p className="my-2 ml-4">{result}</p>
                         </li>
                       ))}
                     </ul>
