@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { LessonContext } from '@/contexts';
 import { checkPseudocodeSyntax } from '@/helpers';
 import ButtonSolid from '../Button/ButtonSolid';
-import { ArrowRightIcon, PlayIcon, PauseIcon } from '@heroicons/react/20/solid';
+import { ArrowRightIcon, ArrowPathIcon } from '@heroicons/react/20/solid';
 import { useRouter, useParams } from 'next/navigation';
 import {
   ChevronLeftIcon,
@@ -26,13 +26,9 @@ type LessonContextType = {
 
 const PreviewInputFlowchart = () => {
   const flowchartRef = useRef<FlowchartDynamicHandle | null>(null);
-  const route = useRouter();
-  const params = useParams();
 
-  const [isShowFlowchart, setIsShowFlowchart] = useState(false);
   const [isRunAuto, setIsRunAuto] = useState<boolean>(false);
 
-  const { lesson } = params;
   const {
     pseudo,
     inputs,
@@ -59,7 +55,6 @@ const PreviewInputFlowchart = () => {
   }, [inputs]);
 
   const handleNextStep = () => {
-    console.log('🚀 ~ handleNextStep ~ inputs:', inputs);
     // Return when current-step is not valid
     if (
       !(Object.keys(inputs).length === 0) &&
@@ -78,6 +73,13 @@ const PreviewInputFlowchart = () => {
       handlePrevStepTrigger(); // Trigger the registered callback in EBInputQuest
     }
   };
+
+  const handleRestart = () => {
+    if (flowchartRef.current) {
+      flowchartRef.current.backwardToStart();
+      setIsRunAuto(true);
+    }
+  }
 
   // const handleRunAuto = () => {
   //   if (flowchartRef.current) {
@@ -130,6 +132,10 @@ const PreviewInputFlowchart = () => {
             onClick={handleForward}
           />
         </div> */}
+        <div>
+          <ArrowPathIcon className="size-8 rounded-full bg-primary p-2 text-on-primary hover:cursor-pointer hover:brightness-110" 
+          onClick={handleRestart}/>
+        </div>
         <div className="flex flex-row gap-4">
           <ChevronLeftIcon
             className="size-8 rounded-full bg-primary p-2 text-on-primary hover:cursor-pointer hover:brightness-110"

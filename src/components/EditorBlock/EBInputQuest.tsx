@@ -21,6 +21,7 @@ type LessonContextType = {
   inputMode: boolean;
   setInputMode: (value: boolean) => void;
   contents: ContentPair[];
+  inputs: Record<string, number>;
   setInputs: (value: Record<string, number>) => void;
   setIsCurrentStepValid: (value: ValidType) => void;
   registerPrevStepTrigger: (callback: () => void) => void;
@@ -37,6 +38,7 @@ const EBInputQuest = () => {
     inputMode,
     setInputMode,
     contents,
+    inputs,
     setInputs,
     setIsCurrentStepValid,
     registerPrevStepTrigger
@@ -133,6 +135,13 @@ const EBInputQuest = () => {
     contentsEndRef.current?.scrollIntoView();
   }, [contents]);
 
+  useEffect(()=>{
+    // inputs rỗng
+    if (Object.keys(inputs).length === 0) {
+      setInputValues([]);
+    }
+  },[inputs])
+
   // Hàm xử lý render step với component InputAssignment
   const renderContent = (content: ContentPair, index: number) => {
     if (content.type === NodeType.Oval) {
@@ -147,27 +156,62 @@ const EBInputQuest = () => {
         </div>
       );
     } else if (content.type === NodeType.Parallelogram) {
-      if (content.right)
-        // OUTPUT or Completed INPUT
-        return (
-          <div
-            className={classNames(
-              index === contents.length - 1 ? currColorContent : '',
-              'flex w-full flex-row items-center p-1'
-            )}
-          >
-            <React.Fragment>
-              <span>{content.left}: </span>
-              <InputAssignment
-                key={index}
-                value={content.right}
-                title="test"
-                readOnly={!inputMode}
-                onChange={(value) => handleInputChange(index, value)}
-              />
-            </React.Fragment>
-          </div>
-        );
+      if (content.right) {
+        if (content.left.startsWith("Xuất")) {
+          // OUTPUT
+          return (
+            <div
+              className={classNames(
+                index === contents.length - 1 ? currColorContent : '',
+                'flex w-full flex-row items-center p-1'
+              )}
+            >
+              <React.Fragment>
+                <span>{content.left}: </span>
+                <InputAssignment
+                  key={index}
+                  title="test"
+                  readOnly={!(index === contents.length - 1)}
+                  valid={inputValues[index] ? inputValues[index].valid : 'default'}
+                  onChange={(value) => handleInputChange(index, value)}
+                  onEnter={(e) =>
+                    handleCheck(index, inputValues[index].value, content.right)
+                  }
+                  autoFocus={index === contents.length - 1}
+                />
+              </React.Fragment>
+            </div>
+          );
+        } 
+        else {
+          // Completed INPUT
+          return (
+            <div
+              className={classNames(
+                index === contents.length - 1 ? currColorContent : '',
+                'flex w-full flex-row items-center p-1'
+              )}
+            >
+              <React.Fragment>
+                <span>{content.left}: </span>
+                <InputAssignment
+                  key={index}
+                  value={content.right}
+                  title="test"
+                  readOnly={!inputMode}
+                  onChange={(value) => handleInputChange(index, value)}
+                  onEnter={(e) =>
+                    handleCheck(index, inputValues[index].value, content.right)
+                  }
+                  autoFocus={index === contents.length - 1}
+                />
+              </React.Fragment>
+            </div>
+          );
+        }
+      }
+      
+
       return (
         // INPUT
         <>
